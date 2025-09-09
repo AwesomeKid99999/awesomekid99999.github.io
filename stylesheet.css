@@ -1,7 +1,13 @@
+
+
 body {
   font-family: system-ui, sans-serif;
   background-color: #ffffff;
   color: #000000;
+}
+
+h1 {
+  font-family: system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -9,5 +15,9 @@ body {
     font-family: system-ui, sans-serif;
     background-color: #000000;
     color: #ffffff;
+  }
+  
+  h1 {
+  font-family: system-ui, sans-serif;
   }
 }
