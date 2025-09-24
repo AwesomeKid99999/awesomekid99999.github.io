@@ -52,16 +52,28 @@
 
   // ===== Modern path below =====
   // Consistent formatters for both your local time and LA time
-  const LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
-    dateStyle: "full",
-    timeStyle: "long",
-  });
+    // Viewer’s local time
+    const LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    });
 
-  const LA_FMT = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Los_Angeles",
-    dateStyle: "full",
-    timeStyle: "long",
-  });
+// Your fixed zone (Los Angeles)
+    const LA_FMT = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    });
 
   // Website creation moment (in milliseconds since epoch)
   const CREATED_AT_MS = 1757381230000; // adjust if needed
