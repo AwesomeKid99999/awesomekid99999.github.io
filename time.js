@@ -106,10 +106,28 @@
   }
 
   window.addEventListener("DOMContentLoaded", () => {
-    syncServerTime().finally(() => {
-      update();
-      setInterval(update, 1000);
-    });
-    setInterval(syncServerTime, 5 * 60 * 1000);
+      function startClock() {
+          update();
+          setInterval(update, 1000);
+      }
+
+      // If fetch/Promises aren’t available, just start the clock without server sync
+      if (!(window.fetch && window.Promise)) {
+          startClock();
+          return;
+      }
+
+      // Start after first sync; start even if sync fails
+      syncServerTime()
+          .then(startClock, startClock);
+
+      // Periodic resync (ignore errors)
+      setInterval(function () {
+          try {
+              syncServerTime().catch(function () {
+              });
+          } catch (e) {
+          }
+      }, 5 * 60 * 1000);
   });
 })();
