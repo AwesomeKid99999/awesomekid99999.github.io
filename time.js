@@ -48,21 +48,22 @@ if (typeof Intl === "undefined" || !Intl.DateTimeFormat) {
   });
   throw new Error("Intl not supported");
 }
+
+
 const MY_ZONE = "America/Los_Angeles"; // your fixed zone for "my time"
 const CREATED_AT_MS = 1757381230000;    // website creation moment (ms since epoch)
 
-const YOUR_FMT = new Intl.DateTimeFormat(undefined, {
-  dateStyle: "full",
-  timeStyle: "long",
+const YOUR_FMT = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "full",
+
+    timeStyle: "long",
 });
 
-const MY_FMT = new Intl.DateTimeFormat(undefined, {
-  dateStyle: "full",
-  timeStyle: "long",
-  timeZone: MY_ZONE,
-  timeZoneName: "short",
+const MY_FMT = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    dateStyle: "full",
+    timeStyle: "long",
 });
-
 function formatRelative(thenMs) {
   const nowMs = Date.now();
   const diffSec = Math.floor((nowMs - thenMs) / 1000);
