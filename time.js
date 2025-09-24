@@ -5,20 +5,22 @@
 (function(){
   var LEGACY = (typeof Intl === "undefined" || !Intl.DateTimeFormat);
 
-  if (LEGACY) {
-    // Legacy: no Intl support — show only Your local time and an upgrade note for My time.
-    document.addEventListener("DOMContentLoaded", function(){
-      var now = new Date();
-      var yt = document.getElementById("your-time");
-      if (yt) yt.textContent = now.toLocaleString ? now.toLocaleString() : now+"";
+    if (LEGACY) {
+        // Legacy: no Intl support — show only Your local time and a note for My local time
+        document.addEventListener("DOMContentLoaded", function(){
+            var now = new Date();
 
-      var mt = document.getElementById("my-time");
-      if (mt) mt.textContent = "(Upgrade your browser to view my local time)";
+            var yt = document.getElementById("your-time");
+            if (yt) yt.textContent = "Your local time: " + (now.toLocaleString ? now.toLocaleString() : now+"");
 
-      var uc = document.getElementById("under-construction-since");
-      if (uc) uc.textContent = "(Relative time unavailable on this browser)";
-    });
-    return; // stop here for legacy
+            var mt = document.getElementById("my-time");
+            if (mt) mt.textContent = "My local time: (Upgrade your browser to view)";
+
+            var uc = document.getElementById("under-construction-since");
+            if (uc) uc.textContent = "Under construction since: (Relative time unavailable on this browser)";
+        });
+        return; // stop here for legacy
+
   }
 
   // ===== Modern path below =====
