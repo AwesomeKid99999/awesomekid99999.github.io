@@ -6,34 +6,48 @@
   var LEGACY = (typeof Intl === "undefined" || !Intl.DateTimeFormat);
 
     if (LEGACY) {
-      // Legacy: no Intl support — show only Your local time and a note for My local time
-      function pad2(n){ return (n<10?'0':'')+n; }
-      function fmtDate(d){
-        return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate())+" "
-             + pad2(d.getHours())+":"+pad2(d.getMinutes())+":"+pad2(d.getSeconds());
-      }
-      function setTextLegacy(id, text){
-        var el = document.getElementById(id);
-        if (!el) return;
-        if ("textContent" in el) el.textContent = text;
-        else if ("innerText" in el) el.innerText = text;
-        else el.innerHTML = text;
-      }
-      function legacyRender(){
-        var now = new Date();
-        var human = (now.toLocaleString ? now.toLocaleString() : fmtDate(now));
-        setTextLegacy("your-time", "Your local time: " + human);
-        setTextLegacy("my-time", "My local time: (Upgrade your browser to view)");
-        setTextLegacy("under-construction-since", "Under construction since: (Relative time unavailable on this browser)");
-      }
-      if (document.addEventListener) {
-        document.addEventListener("DOMContentLoaded", legacyRender);
-      } else if (document.attachEvent) {
-        document.attachEvent("onreadystatechange", function(){ if (document.readyState === "complete") legacyRender(); });
-      }
-      var prevOnload = window.onload;
-      window.onload = (typeof prevOnload === "function") ? function(){ prevOnload(); legacyRender(); } : legacyRender;
-      return; // stop here for legacy
+        // Simple pad function
+        function pad2(n){ return (n < 10 ? "0" : "") + n; }
+
+        function fmtDateTime(d) {
+            var yyyy = d.getFullYear();
+            var mm = pad2(d.getMonth() + 1);
+            var dd = pad2(d.getDate());
+            var hh = d.getHours();
+            var mi = pad2(d.getMinutes());
+            var ss = pad2(d.getSeconds());
+            var ampm = "";
+            // optional 12h format
+            if (hh >= 12) { ampm = " PM"; if (hh > 12) hh -= 12; }
+            else { ampm = " AM"; if (hh === 0) hh = 12; }
+            return mm + "/" + dd + "/" + yyyy + " " + hh + ":" + mi + ":" + ss + ampm;
+        }
+
+        function setTextLegacy(id, text){
+            var el = document.getElementById(id);
+            if (!el) return;
+            if ("textContent" in el) el.textContent = text;
+            else if ("innerText" in el) el.innerText = text;
+            else el.innerHTML = text;
+        }
+
+        function legacyRender(){
+            var now = new Date();
+            setTextLegacy("your-time", "Your local time: " + fmtDateTime(now));
+            setTextLegacy("my-time", "My local time: (Upgrade your browser to view)");
+            setTextLegacy("under-construction-since",
+                "Under construction since: (Relative time unavailable on this browser)");
+        }
+
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", legacyRender);
+        } else if (document.attachEvent) {
+            document.attachEvent("onreadystatechange", function(){
+                if (document.readyState === "complete") legacyRender();
+            });
+        }
+        window.onload = legacyRender;
+        return; // stop here for legacy
     }
 
   // ===== Modern path below =====
