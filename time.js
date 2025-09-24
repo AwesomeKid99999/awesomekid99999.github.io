@@ -8,19 +8,18 @@
     if (LEGACY) {
         // Simple pad function
         function pad2(n){ return (n < 10 ? "0" : "") + n; }
+        var WDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
         function fmtDateTime(d) {
+
+
             var yyyy = d.getFullYear();
             var mm = pad2(d.getMonth() + 1);
             var dd = pad2(d.getDate());
             var hh = d.getHours();
             var mi = pad2(d.getMinutes());
             var ss = pad2(d.getSeconds());
-            var ampm = "";
-            // optional 12h format
-            if (hh >= 12) { ampm = " PM"; if (hh > 12) hh -= 12; }
-            else { ampm = " AM"; if (hh === 0) hh = 12; }
-            return mm + "/" + dd + "/" + yyyy + " " + hh + ":" + mi + ":" + ss + ampm;
+            return WDAYS[d.getDay()] + ", " + mm + "/" + dd + "/" + yyyy + " " + hh + ":" + mi + ":" + ss ;
         }
 
         function setTextLegacy(id, text){
