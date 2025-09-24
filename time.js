@@ -6,22 +6,35 @@
   var LEGACY = (typeof Intl === "undefined" || !Intl.DateTimeFormat);
 
     if (LEGACY) {
-        // Legacy: no Intl support — show only Your local time and a note for My local time
-        document.addEventListener("DOMContentLoaded", function(){
-            var now = new Date();
-
-            var yt = document.getElementById("your-time");
-            if (yt) yt.textContent = "Your local time: " + (now.toLocaleString ? now.toLocaleString() : now+"");
-
-            var mt = document.getElementById("my-time");
-            if (mt) mt.textContent = "My local time: (Upgrade your browser to view)";
-
-            var uc = document.getElementById("under-construction-since");
-            if (uc) uc.textContent = "Under construction since: (Relative time unavailable on this browser)";
-        });
-        return; // stop here for legacy
-
-  }
+      // Legacy: no Intl support — show only Your local time and a note for My local time
+      function pad2(n){ return (n<10?'0':'')+n; }
+      function fmtDate(d){
+        return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate())+" "
+             + pad2(d.getHours())+":"+pad2(d.getMinutes())+":"+pad2(d.getSeconds());
+      }
+      function setTextLegacy(id, text){
+        var el = document.getElementById(id);
+        if (!el) return;
+        if ("textContent" in el) el.textContent = text;
+        else if ("innerText" in el) el.innerText = text;
+        else el.innerHTML = text;
+      }
+      function legacyRender(){
+        var now = new Date();
+        var human = (now.toLocaleString ? now.toLocaleString() : fmtDate(now));
+        setTextLegacy("your-time", "Your local time: " + human);
+        setTextLegacy("my-time", "My local time: (Upgrade your browser to view)");
+        setTextLegacy("under-construction-since", "Under construction since: (Relative time unavailable on this browser)");
+      }
+      if (document.addEventListener) {
+        document.addEventListener("DOMContentLoaded", legacyRender);
+      } else if (document.attachEvent) {
+        document.attachEvent("onreadystatechange", function(){ if (document.readyState === "complete") legacyRender(); });
+      }
+      var prevOnload = window.onload;
+      window.onload = (typeof prevOnload === "function") ? function(){ prevOnload(); legacyRender(); } : legacyRender;
+      return; // stop here for legacy
+    }
 
   // ===== Modern path below =====
   // Consistent formatters for both your local time and LA time
