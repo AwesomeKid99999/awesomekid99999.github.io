@@ -52,8 +52,8 @@
 
   // ===== Modern path below =====
   // Consistent formatters for both your local time and LA time
-    // Viewer’s local time
     const LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -63,9 +63,9 @@
         hour12: false
     });
 
-// Your fixed zone (Los Angeles)
     const LA_FMT = new Intl.DateTimeFormat("en-US", {
         timeZone: "America/Los_Angeles",
+        weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric",
