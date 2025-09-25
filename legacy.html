@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <title>Legacy Browsers - AwesomeKid99999's website!</title>
+    <style>
+        header, nav, main, section, footer { display:block; }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header>
+    <nav>
+        <a href="#home" class="button">Home</a>
+        <a href="#about" class="button">About Me</a>
+        <a href="#portfolio" class="button">Portfolio</a>
+        <a href="#contact" class="button">Contact Me</a>
+       <label for="theme">Theme:</label>
+        <select id="theme">
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+    </nav>
+</header>
+
+<main id ="main">
+    <h1>Andy's (AwesomeKid99999's) website!</h1>
+    <!-- This is a placeholder for now -->
+    <p>UNDER CONSTRUCTION SINCE <span id="under-construction-since"></span></p>
+
+    <section id="home"><h2>Home</h2><p>Welcome! This is a site that I built showcasing my projects I did in the past. This was built with backwards compatibility in mind that can support old browsers like Google Chrome on Windows XP. This is done in plain HTML, CSS, and Javascript. This website is being hosted on GitHub pages. You can view the source code <a href="https://github.com/AwesomeKid99999/awesomekid99999.github.io">here</a>. Feel free to look around!</p></section>
+    <section id="about"><h2>About Me</h2><p>This is where I will talk briefly about myself</p></section>
+    <section id="portfolio"><h2>Portfolio</h2><p>My projects will go here</p></section>
+    <section id="contact"><h2>Contact Me</h2><p>Sorry, please upgrade your browser for more security.</p></section>
+
+</main>
+<footer>
+    <p>It's currently <span id="your-time"></span> for you and <span id="my-time"></span> for me.
+      <br>
+        &copy; 2025 AwesomeKid99999 (Andy Quach). All rights reserved. Last updated: <span id ="last-updated-since"></span> (your local date/time)
+    </p>
+</footer>
+<script src="./time.js"></script>
+<script src="./theme.js"></script>
+</body>
+</html>

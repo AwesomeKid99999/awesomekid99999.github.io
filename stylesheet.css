@@ -12,6 +12,25 @@ body {
     background-color: #000000;
     color: #ffffff;
   }
+  a {
+    color: #00FFFF;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #00DDDD;
+    text-decoration: underline;
+  }
+
+  a:visited {
+    color: #FF00fF;
+  }
+
+  a:active {
+    color: #ff0000;
+  }
+
+
 }
 
 
@@ -27,5 +46,77 @@ body.dark {
 }
 
 a {
+  color: #0077cc;
   text-decoration: none;
 }
+
+a:hover {
+  color: #005599;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #FF00fF;
+}
+
+a:active {
+  color: #ff0000;
+}
+
+a.dark {
+  color: #00FFFF;
+  text-decoration: none;
+}
+
+a.dark:hover {
+  color: #00DDDD;
+  text-decoration: underline;
+}
+
+a.dark:visited {
+  color: #FF00fF;
+}
+
+a.dark:active {
+  color: #ff0000;
+}
+
+
+a.button {
+  display: inline-block;
+  padding: 0.5em;
+  background: #00cc00;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: system-ui, sans-serif;
+}
+
+a.button:visited {
+  color: #ffffff;
+}
+
+a.button:hover {
+  background: #00aa00;
+  text-decoration: none;
+}
+
+
+header, footer, section, nav, main, article {
+  display: block;
+}
+
+select {
+  display: inline-block;
+  padding: 0.5em;
+  background: #00cc00;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: system-ui, sans-serif;
+}
+
+select:hover {
+  background: #00aa00;
+}
+
