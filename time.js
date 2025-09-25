@@ -78,7 +78,6 @@
 
   // Website creation moment (in milliseconds since epoch)
   const CREATED_AT_MS = 1757381230000; // adjust if needed
-  const LAST_UPDATED_AT_MS = 1758760086000; // adjust if needed
 
   let __anchorServerMs = 0;
   let __anchorPerfMs = 0;
@@ -127,7 +126,7 @@
     if (underEl) underEl.textContent = formatRelative(CREATED_AT_MS);
 
     const updatedEl = document.getElementById("last-updated-since");
-    if (updatedEl) updatedEl.textContent = formatRelative(LAST_UPDATED_AT_MS);
+    if (updatedEl) updatedEl.textContent = document.lastModified;
 
     const yourEl = document.getElementById("your-time");
     if (yourEl) yourEl.textContent = LOCAL_FMT.format(now);
