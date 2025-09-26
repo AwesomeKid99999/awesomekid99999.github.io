@@ -3,39 +3,41 @@
 <head>
     <link rel="stylesheet" href="stylesheet.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
-    <title>Legacy Browsers - AwesomeKid99999's website!</title>
-    <style>
-        header, nav, main, section, footer { display:block; }
-    </style>
+    <title>Lightweight - AwesomeKid99999's website!</title>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
-    <nav>
+    <nav class="nav-left">
         <a href="#home" class="button">Home</a>
         <a href="#about" class="button">About Me</a>
         <a href="#portfolio" class="button">Portfolio</a>
         <a href="#contact" class="button">Contact Me</a>
-       <label for="theme">Theme:</label>
-        <select id="theme">
+    </nav>
+    <nav class="nav-right">
+        <label for="theme">Theme:</label>
+        <select id="theme" aria-label="Theme Selector" disabled>
             <option value="system">System</option>
             <option value="light">Light</option>
             <option value="dark">Dark</option>
         </select>
+        <a href="index.html" class="button">View Full Site</a>
     </nav>
 </header>
 
 <main id ="main">
     <h1>Andy's (AwesomeKid99999's) website!</h1>
     <!-- This is a placeholder for now -->
-    <p>UNDER CONSTRUCTION SINCE <span id="under-construction-since"></span></p>
+    <p>UNDER CONSTRUCTION</p>
 
     <section id="home"><h2>Home</h2>
         <p>
             Welcome! This is my personal portfolio site where I showcase projects I've worked on.
-            I built this site with accessibility in mind, using plain HTML, CSS, and JavaScript, and it’s hosted on GitHub Pages.
+            I built this site with accessibility in mind, using plain HTML, CSS, and JavaScript, and it's hosted on GitHub Pages.
             You can explore the <a href="https://github.com/AwesomeKid99999/awesomekid99999.github.io">source code here</a>.
-            Feel free to look around, and try out the accessibility settings in the top bar!
+            Feel free to look around!
+            <em>Note: Javascript features are disabled in the lightweight version, so that means no theme switching and accessibility features.
+            Use the main website to gain those features.</em>
         </p>
 
         <h3>Featured Projects</h3>
@@ -56,40 +58,19 @@
             <li>Responsive design and made with accessibility in mind</li>
             <li>Deployed via GitHub Pages</li>
             <li>
-                Experimented with legacy browsers on older systems
+                <strong>Takeaway:</strong>
                 <ul>
-                    <li>Early version of this site loaded correctly on Windows XP (see image below)</li>
-                    <li>Ran a local HTTP server for a Nintendo Wii to connect to this site (see image below)</li>
-                </ul>
-            </li>
-            <li>
-                <strong>Takeaways:</strong>
-                <ul>
-                    <li>Discovered that older browsers either fail completely or cannot properly load modern HTTPS sites, reinforcing the importance of progressive enhancement.</li>
                     <li>Gained hands-on experience with web development that is designed with accessibility</li>
                 </ul>
             </li>
         </ul>
-        <figure>
-            <img src="images/Screenshot%202025-09-25%20at%202.46.16%E2%80%AFAM.png"
-                 alt="Portfolio website displayed on Windows XP" style="width:100%">
-            <figcaption>
-                Windows XP running a very early build of this site to evaluate legacy browser compatibility.
-            </figcaption>
-        </figure>
-
-
     </section>
-    <section id="contact"><h2>Contact Me</h2><p>Sorry, please upgrade your browser for more security.</p></section>
-
+    <section id="contact"><h2>Contact Me</h2>
+        <p>You may contact me at [first name] [last name] t [at] gmail [dot] com. (no spaces)</p>
+    </section>
 </main>
 <footer>
-    <p>It's currently <span id="your-time"></span> for you and <span id="my-time"></span> for me.
-      <br>
-        &copy; 2025 AwesomeKid99999 (Andy Quach). All rights reserved. Last updated: <span id ="last-updated-since"></span> (your local date/time)
-    </p>
+    <p>&copy; 2025 AwesomeKid99999 (Andy Quach). All rights reserved.</p>
 </footer>
-<script src="./time.js"></script>
-<script src="./theme.js"></script>
 </body>
 </html>

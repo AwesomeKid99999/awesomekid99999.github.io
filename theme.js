@@ -1,6 +1,6 @@
 (function () {
     var SELECT_ID = "theme";
-    var KEY = "theme-preference"; // 'system' | 'light' | 'dark' | 'retro'
+    var KEY = "theme-preference"; // 'system' | 'light' | 'dark'
     var sel = document.getElementById(SELECT_ID);
 
     // Apply a theme: clear class for system; otherwise set class
@@ -8,7 +8,7 @@
         if (name === "system" || !name) {
             document.body.className = ""; // system = let CSS @media decide
         } else {
-            document.body.className = name; // light | dark | retro
+            document.body.className = name; // light | dark
         }
     }
 

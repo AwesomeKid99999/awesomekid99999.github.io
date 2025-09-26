@@ -4,7 +4,7 @@ body {
   font-family: system-ui, sans-serif;
   background-color: #ffffff;
   color: #000000;
-  transition: background-color 300ms, color 300ms;
+  transition: background-color 500ms, color 500ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,7 +12,7 @@ body {
     font-family: system-ui, sans-serif;
     background-color: #000000;
     color: #ffffff;
-    transition: background-color 300ms, color 300ms;
+    transition: background-color 500ms, color 500ms;
   }
   a {
     color: #00FFFF;
@@ -40,13 +40,13 @@ body.light {
   font-family: system-ui, sans-serif;
   background-color: #ffffff;
   color: #000000;
-  transition: background-color 300ms, color 300ms;
+  transition: background-color 500ms, color 500ms;
 }
 body.dark {
   font-family: system-ui, sans-serif;
   background-color: #000000;
   color: #ffffff;
-  transition: background-color 300ms, color 300ms;
+  transition: background-color 500ms, color 500ms;
 }
 
 a {
@@ -122,9 +122,16 @@ select {
   text-decoration: none;
   font-weight: bold;
   font-family: system-ui, sans-serif;
+  align-content: end;
 }
 
 select:hover {
   background: #00aa00;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
