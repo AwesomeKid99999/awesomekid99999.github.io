@@ -24,20 +24,23 @@ let __anchorPerfMs = 0;
 function syncServerTime() {
     const url = `/time-ping.txt?nocache=${Math.random()}`;
     const t0 = performance.now();
+
+    function handle(res, note) {
+        const dateHdr = res.headers.get("Date");
+        if (!dateHdr) throw new Error(`No Date header (${note})`);
+        const serverSentMs = Date.parse(dateHdr);
+        const t1 = performance.now();
+        const rtt = t1 - t0;
+        const serverAtArrival = serverSentMs + rtt / 2;
+        __anchorServerMs = serverAtArrival;
+        __anchorPerfMs = t1;
+    }
+
+    // try HEAD first, then GET
     return fetch(url, { method: "HEAD", cache: "no-store" })
-        .then(res => {
-            const dateHdr = res.headers.get("Date");
-            if (!dateHdr) throw new Error("No Date header");
-            const serverSentMs = Date.parse(dateHdr);
-            const t1 = performance.now();
-            const rtt = t1 - t0;
-            const serverAtArrival = serverSentMs + rtt / 2;
-            __anchorServerMs = serverAtArrival;
-            __anchorPerfMs = t1;
-        })
-        .catch(err => {
-            console.error("Time sync failed:", err);
-        });
+        .then(res => handle(res, "HEAD"))
+        .catch(() => fetch(url, { method: "GET", cache: "no-store" }).then(res => handle(res, "GET")))
+        .catch(err => console.error("Time sync failed:", err));
 }
 
 function getAdjustedNow() {
@@ -47,7 +50,7 @@ function getAdjustedNow() {
 }
 
 function formatRelative(thenMs) {
-    const nowMs = Date.now();
+    const nowMs = getAdjustedNow();
     const diffSec = Math.floor((nowMs - thenMs) / 1000);
     if (diffSec < 60) return `${diffSec} seconds ago`;
     if (diffSec < 3600) return `${Math.floor(diffSec / 60)} minutes ago`;
