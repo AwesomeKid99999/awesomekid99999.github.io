@@ -15,6 +15,22 @@
     <a href="contact.html" class="button">Contact Me</a>
   </nav>
   <nav class="nav-right">
+    <label for="contrast">High Contrast:</label>
+    <select id="contrast" aria-label="High Contrast">
+      <option value="off">Off</option>
+      <option value="on">On</option>
+    </select>
+    <label for="display-colors">Display Colors:</label>
+    <select id="display-colors" aria-label="Display Color Selector">
+      <option value="normal">Normal</option>
+      <option value="invert-colors">Invert Colors</option>
+      <option value="grayscale">Grayscale</option>
+    </select>
+    <label for="dyslexia-friendly-font">Dyslexia-Friendly Font:</label>
+    <select id="dyslexia-friendly-font" aria-label="Dyslexia-Friendly Font Toggle">
+      <option value="disabled">Disabled</option>
+      <option value="enabled">Enabled</option>
+    </select>
     <label for="theme">Theme:</label>
     <select id="theme" aria-label="Theme Selector">
       <option value="system">System</option>
@@ -51,6 +67,6 @@
   </ul>
 </footer>
 <script src="./time.js"></script>
-<script src="./theme.js"></script>
+<script src="accessibilitySettings.js"></script>
 </body>
 </html>

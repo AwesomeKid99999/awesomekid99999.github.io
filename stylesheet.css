@@ -1,53 +1,137 @@
 
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('OpenDyslexic-Regular.woff')  format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-light: #ffffff;
+  --bg-dark:  #000000;
+  --text-light: #000000;
+  --text-dark:  #ffffff;
+  --hc-bg: #000;         /* absolute black */
+  --hc-fg: #fff;         /* absolute white */
+  --hc-accent: #ffdd00;  /* bright yellow for focus/accents */
+  --hc-link: #00ffff;    /* cyan links */
+  --hc-link-hover: #00bcd4;
+  --hc-danger: #ff00ff;  /* magenta alt accent (optional) */
+}
 
 body {
+  background-color: var(--bg-light);
+  color: var(--text-light);
   font-family: system-ui, sans-serif;
-  background-color: #ffffff;
-  color: #000000;
-  transition: background-color 500ms, color 500ms;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    font-family: system-ui, sans-serif;
-    background-color: #000000;
-    color: #ffffff;
-    transition: background-color 500ms, color 500ms;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
   }
-  a {
-    color: #00FFFF;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #00DDDD;
-    text-decoration: underline;
-  }
-
-  a:visited {
-    color: #FF00fF;
-  }
-
-  a:active {
-    color: #ff0000;
-  }
-
-
 }
-
 
 body.light {
-  font-family: system-ui, sans-serif;
-  background-color: #ffffff;
-  color: #000000;
-  transition: background-color 500ms, color 500ms;
+  background-color: var(--bg-light);
+  color: var(--text-light);
 }
 body.dark {
-  font-family: system-ui, sans-serif;
-  background-color: #000000;
-  color: #ffffff;
-  transition: background-color 500ms, color 500ms;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
 }
+
+body.font-dyslexic {
+  font-family: 'OpenDyslexic', system-ui, sans-serif !important;
+}
+
+body.font-dyslexic * {
+  font-family: inherit !important;
+}
+
+.invert    { filter: invert(1); }
+.grayscale { filter: grayscale(1); }
+
+
+
+/* Theme-specific variables for High Contrast */
+body.high-contrast.hc-dark {
+  --hc-bg: #000000;
+  --hc-fg: #ffffff;
+  --hc-link: #00ffff;
+  --hc-link-hover: #00dddd;
+  --hc-accent: #ffff00;
+}
+
+body.high-contrast.hc-light {
+  --hc-bg: #ffffff;
+  --hc-fg: #000000;
+  --hc-link: #0000ee;
+  --hc-link-hover: #0055ff;
+  --hc-accent: #aa00ff;
+}
+
+/* Nuke low-contrast effects */
+body.high-contrast * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  /* Kill transitions so color changes are instant & readable */
+  transition: none !important;
+}
+
+/* Links: bright + always underlined */
+body.high-contrast a,
+body.high-contrast a:visited {
+  color: var(--hc-link) !important;
+  text-decoration: underline !important;
+}
+body.high-contrast a:hover,
+body.high-contrast a:focus {
+  color: var(--hc-link-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Clear, thick focus outline on all interactives */
+body.high-contrast a,
+body.high-contrast button,
+body.high-contrast input,
+body.high-contrast select,
+body.high-contrast textarea,
+body.high-contrast [role="button"] {
+  outline-offset: 3px;
+}
+body.high-contrast :focus {
+  outline: 3px solid var(--hc-accent) !important;
+}
+
+/* Buttons/selects/inputs: solid borders, no tints */
+body.high-contrast button,
+body.high-contrast select,
+body.high-contrast input,
+body.high-contrast textarea {
+  background: var(--hc-bg) !important;
+  color: var(--hc-fg) !important;
+  border: 2px solid var(--hc-fg) !important;
+}
+
+/* Your green “button” link variant: keep it readable */
+body.high-contrast a.button {
+  background: transparent !important;
+  border: 2px solid var(--hc-fg) !important;
+  color: var(--hc-fg) !important;
+}
+
+/* Optional: add borders to major containers if you use them */
+body.high-contrast header,
+body.high-contrast footer,
+body.high-contrast nav,
+body.high-contrast section,
+body.high-contrast .card {
+  border: 2px solid var(--hc-fg);
+}
+
+
 
 a {
   color: #0077cc;
@@ -93,7 +177,6 @@ a.button {
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  font-family: system-ui, sans-serif;
 }
 
 a.button:visited {
@@ -121,7 +204,6 @@ select {
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  font-family: system-ui, sans-serif;
   align-content: end;
 }
 
@@ -135,3 +217,8 @@ header {
   align-items: center;
   padding: 10px 20px;
 }
+
+/*.font-dyslexic {*/
+/*  font-family: 'OpenDyslexic', sans-serif;*/
+/*}*/
+
