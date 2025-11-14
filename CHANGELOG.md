@@ -35,3 +35,7 @@ October 16, 2025 - Added full video links to custom Project Sekai Custom Chart g
 October 30, 2025 - Added more accessibility features: high contrast mode, invert colors and grayscale mode, and dyslexia-friendly font toggle options.
 
 November 10, 2025 - Created README.md with project description and instructions to run locally and this changelog.
+
+November 14, 2025 - Removed all emojis from README.md file for professionalism. Moved Project Sekai Custom Chart, Geometry Dash level,
+and Super Mario Maker 2 levels to Archive and added Archive page. Modified text in Portfolio Website and Awesome Obby sections in portfolio.
+Added Contact Form to Contact Me page and added About Me content. Added remaining featured projects to Portfolio page.

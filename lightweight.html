@@ -9,10 +9,11 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
     <nav class="nav-left">
-        <a href="index.html" class="button" aria-label="Home Button">Home</a>
-        <a href="about-me.html" class="button" aria-label="About Me Button">About Me</a>
-        <a href="portfolio.html" class="button" aria-label="Portfolio Button">Portfolio</a>
-        <a href="contact.html" class="button" aria-label="Contact Button">Contact Me</a>
+        <a href="#" class="button" aria-label="Home Button">Home</a>
+        <a href="#about" class="button" aria-label="About Me Button">About Me</a>
+        <a href="#portfolio" class="button" aria-label="Portfolio Button">Portfolio</a>
+        <a href="#archive" class="button" aria-label="Archive Button">Archive</a>
+        <a href="#contact" class="button" aria-label="Contact Button">Contact Me</a>
     </nav>
     <nav class="nav-right">
         <label for="contrast">High Contrast:</label>
@@ -58,96 +59,162 @@
 
         <h3>Featured Projects</h3>
         <ul>
-            <li>AI STEM Tutor</li>
-            <li>Discord Bot (AwesomeBot99999)</li>
-            <li><a href="#portfolio"><em>This</em> website</a></li>
-            <li><a href="#the-awesome-obby">The Awesome Obby! (Unreal Engine)</a></li>
-            <li>Roblox Time Trial Obby</li>
-            <li>Huffman Compressor</li>
-            <li>Weekly Carbon Footprint Calculator</li>
+            <li><a href="#stem-tutor">STEM Tutor - Offline Learning Platform</a></li>
+            <li><a href="#awesomebot99999">AwesomeBot99999 - Multipurpose Discord Bot</a></li>
+            <li><a href="#portfolio-website"><em>This</em> website</a></li>
+            <li><a href="#the-awesome-obby">The Awesome Obby! - 3D Platformer (Unreal Engine)</a></li>
+            <li><a href="#time-trial-roblox">AwesomeKid99999's Time Trial - Roblox Obby</a></li>
+            <li><a href="#huffman-compressor">Huffman Coding Compressor</a></li>
+            <li><a href="#carbon-calculator">Weekly Carbon Footprint Calculator</a></li>
         </ul>
-        <a href="#portfolio">view more</a>
+        <a href="#archive">View Archive</a>
     </section>
-    <section id="about"><h2>About Me</h2><p>This is where I will talk briefly about myself</p></section>
+    <section id="about"><h2>About Me</h2>
+        <p>I am a Computer Science major with an interest in game development, interaction design, and the building of intuitive
+            digital experiences. I enjoy projects that combine programming with creativity, whether it's developing game levels,
+            designing user interfaces, or building tools like my custom Discord bot.</p>
+        <p>I'm always trying new technologies and finding ways to make experiences feel smoother, more expressive, and
+            more fun for people to use. I tend to approach problems quietly and thoughtfully, learning through hands-on
+            experimentation and building things that reflect my interests.</p>
+    </section>
     <section id="portfolio"><h2>Portfolio</h2>
 
-        <h3 id="portfolio-website">Personal Portfolio Website (this website) (in progress)</h3>
+        <h2 id="stem-tutor">
+            <a href="https://github.com/AwesomeKid99999/stem-tutor" target="_blank">
+                STEM Tutor - Offline Learning Platform (9/13-9/14/2025)
+            </a>
+        </h2>
         <ul>
-            <li>Built using plain HTML, CSS, and Javascript</li>
-            <li>Responsive design and made with accessibility in mind</li>
-            <li>Deployed via GitHub Pages</li>
-            <li><em>Experimented with legacy browsers such as Chrome on Windows XP, Opera 9 on Nintendo Wii, and even Mosaic 1.0 on Windows 95</em></li>
-            <li>
-                <strong>Takeaways:</strong>
+            <li>Designed the UI/UX for an offline STEM tutoring tool built during a 24-hour hackathon.</li>
+            <li>Created an accessible interface using Tailwind CSS and collaborated with a small team to integrate an AI library for natural-language feedback.</li>
+            <li>Delivered a functional demo for judges and contributed to the project winning a design-focused award.</li>
+        </ul>
+        <strong>Takeaways:</strong>
+        <ul>
+            <li>Gained experience rapidly prototyping user interfaces under time constraints.</li>
+            <li>Learned how to design for offline and low-connectivity environments.</li>
+        </ul>
+        <h2 id="awesomebot99999">
+            <a href="https://github.com/AwesomeKid99999/AwesomeKid99999-discord-bot" target="_blank">
+                AwesomeBot99999 - Multipurpose Discord Bot (8/3/2021-Present)
+            </a>
+        </h2>
+        <ul>
+            <li>Developed a large-scale Discord bot using Node.js and Discord.js with over 110 modular commands.</li>
+            <li>Implemented a persistent database system and optimized backend logic for reliability and scalability.</li>
+            <li>Containerized the application with Docker for consistent 24/7 uptime.</li>
+            <li>Open-sourced the project with documentation and versioning.</li>
+        </ul>
+        <strong>Takeaways:</strong>
+        <ul>
+            <li>Improved backend development, database management, and real-time event handling skills.</li>
+            <li>Gained experience maintaining a long-term software project used by real users.</li>
+        </ul>
+        <h2 id="portfolio-website">
+            <a href="https://github.com/AwesomeKid99999/awesomekid99999.github.io" target="_blank">
+                Personal Portfolio Website (In Progress)
+            </a>
+        </h2>
+        <ul>
+            <li>Built using plain HTML, CSS, and JavaScript without frameworks to ensure broad compatibility.</li>
+            <li>Designed with responsive layout and accessibility features such as dark mode, high contrast, and dyslexia-friendly options.</li>
+            <li>Deployed through GitHub Pages with version control for iterative updates.</li>
+            <li><em>Tested on legacy browsers and systems (including <a href="media/images/windows%20xp.png">Chrome on Windows XP</a>, <a href="media/images/wii%20browser.jpg">Opera 9 on Nintendo Wii</a>, and <a href="media/images/Mosaic.png">Mosaic 1.0 on Windows 95</a>) to explore compatibility constraints.</em></li>
+            <li><strong>Takeaways:</strong>
                 <ul>
-                    <li>Gained hands-on experience with web development that is designed with accessibility features</li>
-                    <li>Learned how legacy browsers handle (or fail to handle) modern HTML, CSS, and JavaScript.</li>
+                    <li>Developed practical experience building accessible, lightweight web pages that function without modern frameworks.</li>
+                    <li>Gained insight into how outdated browsers interpret or fail to interpret modern HTML, CSS, and JavaScript standards.</li>
                 </ul>
             </li>
         </ul>
-        <h3 id="the-awesome-obby">The Awesome Obby! (made in Unreal Engine) (3/15/2022)</h3>
+        <h2 id="the-awesome-obby">
+            <a href="https://drive.google.com/drive/folders/1ZEoGYiSiLvJmhm30Yh8h78_cI9w8cVce?usp=drive_link">
+                The Awesome Obby! - 3D Platformer (Unreal Engine) (3/15/2022)
+            </a>
+        </h2>
         <ul>
-            <li>Designed an obstacle course that dynamically increases in difficulty and features intense platforming</li>
-            <li>Inspired by numerous obby games on <em>Roblox</em></li>
-            <li>
-                <strong>Takeaway:</strong>
+            <li>Designed and built a 3D platformer in Unreal Engine with progressively harder levels and precision-based challenges.</li>
+            <li>Inspired by classic "obby" obstacle-course games on <em>Roblox</em>, reimagined in a full 3D Unreal Engine environment.</li>
+            <li><strong>Takeaway:</strong>
                 <ul>
-                    <li>Gained experience on building a full-length small 3D platformer game that is designed like an obstacle course</li>
+                    <li>Developed hands-on experience with level layout, difficulty ramping, and core platformer mechanics.</li>
                 </ul>
             </li>
-            <li><a href="https://drive.google.com/drive/folders/1ZEoGYiSiLvJmhm30Yh8h78_cI9w8cVce?usp=drive_link">Download Here (Windows Only)</a></li>
         </ul>
-        <a href="media/videos/theAwesomeObby-4k.mp4" download>Download video (~100 MB)</a>
+        <p><a href="media/videos/theAwesomeObby-4k.mp4" download>Download video (~100 MB)</a></p>
+        <h2 id="time-trial-roblox">
+            <a href="https://www.roblox.com/games/6342363229/AwesomeKid99999s-Time-Trial" target="_blank">
+                AwesomeKid99999's Time Trial - Roblox Obby (2/3/2021)
+            </a>
+        </h2>
+        <ul>
+            <li>Designed a timed mini obstacle course using Roblox Studio.</li>
+            <li>Customized existing timer logic to support resets and accurate speedrun tracking.</li>
+            <li>Focused on pacing, obstacle placement, and smooth player flow.</li>
+        </ul>
+        <strong>Takeaways:</strong>
+        <ul>
+            <li>Learned accessible level design and how to shape player experience in short gameplay loops.</li>
+            <li>Gained early experience with simple UI design and event scripting.</li>
+        </ul>
+        <h2 id="huffman-compressor">
+            <a href="https://github.com/AwesomeKid99999/huffman-coding-AwesomeKid99999" target="_blank">
+                Huffman Coding Compressor (3/29-4/10/2024)
+            </a>
+        </h2>
+        <ul>
+            <li>Created a text compression and decompression tool in C++ using the Huffman coding algorithm.</li>
+            <li>Implemented binary tree construction and bit-level file encoding/decoding.</li>
+            <li>Achieved compressed file sizes of about 60% of the originals for large text files.</li>
+        </ul>
+        <strong>Takeaways:</strong>
+        <ul>
+            <li>Gained experience with data compression, tree structures, and bitwise manipulation.</li>
+            <li>Learned modular C++ design through organized header and driver files.</li>
+        </ul>
+        <h2 id="carbon-calculator">
+            <a href="https://github.com/AwesomeKid99999/carbon-footprint-calculator-mips" target="_blank">
+                Weekly Carbon Footprint Calculator (11/27-12/8/2024)
+            </a>
+        </h2>
+        <ul>
+            <li>Collaborated in a three-person team to build an interactive weekly carbon footprint calculator using MIPS Assembly.</li>
+            <li>Classmates focused on implementing the input and calculation routines, while I designed and programmed the animated bar-graph visualization that displays the results.</li>
+            <li>Synchronized the bar graph with the computed emissions so users can quickly see how different activities compare week to week.</li>
+        </ul>
+        <strong>Takeaways:</strong>
+        <ul>
+            <li>Gained experience turning low-level numeric output into a readable visual representation using assembly language.</li>
+            <li>Learned how to coordinate roles in a small team project while focusing on a specific feature area.</li>
+        </ul>
+    </section>
+    <section id="archive"><h2>Archive</h2>
         <h3 id="custom-levels">Custom Level Designs</h3>
-        <h4 id="random-beats-project-sekai-chart"><a href="https://coconut.sonolus.com/next-sekai/levels/coconut-next-sekai-142">Custom Chart with Original Music (made with Sonolus Next SEKAI) (9/20/2025)</a></h4>
+        <h4 id="random-beats-project-sekai-chart"><a href="https://coconut.sonolus.com/next-sekai/levels/coconut-next-sekai-142">random beats - Custom Chart with Original Music (made with Sonolus Next SEKAI) (9/20/2025)</a></h4>
         <ul>
-            <li>Designed a custom fanmade Project Sekai chart using a soundtrack I made.</li>
-            <li><em>The music was composed in Logic Pro using Apple's loops.</em></li>
-            <li>
-                <strong>Takeaway:</strong>
-                <ul>
-                    <li>Acquired experience on charting rhythm game levels to the beats of the music I composed.</li>
-                </ul>
-            </li>
-            <li>View the full chart gameplay <a href="https://youtu.be/h3QgYV7yIrI">here</a></li>
+            <li>Made a fan chart to go with a song I wrote.</li>
+            <li><em>Wrote the track in Logic Pro using Apple loops.</em></li>
+            <li>Watch the full gameplay <a href="https://youtu.be/h3QgYV7yIrI">here</a></li>
         </ul>
-        <a href="media/videos/sonolusChart-4K.mp4" download>Download video (~90 MB)</a>
-        <h4 id="awesome-madness">Awesome Madness (Custom Geometry Dash Level based on Stereo Madness) (ID: 48346053) (8/18/2018)</h4>
-        <ul>
-            <li>Designed a custom Geometry Dash level that was inspired by <em>Stereo Madness</em>.</li>
-            <li><em>Stereo Madness is the easiest level in the game. The song was composed by ForeverBound.</em></li>
-            <li>
-                <strong>Takeaway:</strong>
-                <ul>
-                    <li>First time designing a rhythm-based platformer level that focuses on synchronization and accessible difficulty progression.</li>
-                </ul>
-            </li>
-        </ul>
-        <a href="media/videos/awesomeMadness-4K.mp4" download>Download video (~100 MB)</a>
+        <p><a href="media/videos/sonolusChart-4K.mp4" download>Download Video of Early Version (MP4, ~90 MB)</a></p>
         <h4 id="superball-adventure">Superball Adventure (Custom Super Mario Maker 2 Level with <em>Super Mario Bros.</em> Game Style) (ID: Y8T-SWN-6WG) (9/9/2019)</h4>
         <ul>
-            <li>Designed a custom <em>Super Mario</em> level that revolves around collecting coins via the <em>Superball</em> power-up from the game <em>Super Mario Land</em>.</li>
-            <li>In this level, the player has to strategize how to collect all the coins in each room.</li>
-            <li>
-                <strong>Takeaway:</strong>
-                <ul>
-                    <li>Designed a level that focuses on problem-solving skills while collecting everything.</li>
-                </ul>
-            </li>
-            <li>View the full level gameplay <a href="https://youtu.be/MHoMX_52roE">here</a></li>
+            <li>Built a Super Mario level around the <em>Superball</em> power-up from <em>Super Mario Land</em>.</li>
+            <li>Each room's a short puzzle where you try to grab all the coins.</li>
         </ul>
+        <p><a href="https://youtu.be/MHoMX_52roE">Watch Superball Adventure on YouTube</a></p>
         <h4 id="desert-or-mountain">Desert or Mountain? (Custom Super Mario Maker 2 Level with <em>Super Mario World</em> Game Style) (ID: Y2T-SYT-5DG) (7/12/2019)</h4>
         <ul>
-            <li>Designed a custom <em>Super Mario</em> level that is difficult to beat overall.</li>
-            <li>In this level, the player first travels through a desert themed area, then enters a mountain-themed area, where they climb the level vertically with more intense platforming.</li>
-            <li>
-                <strong>Takeaway:</strong>
-                <ul>
-                    <li>Designed an expert-class level that was inspired by harder levels in the <em>Super Mario</em> series.</li>
-                </ul>
-            </li>
-            <li>View the full level gameplay <a href="https://youtu.be/pU6Cap8lly0">here</a></li>
+            <li>Made a pretty tough Mario level: starts in a desert, then you climb a mountain.</li>
+            <li>The vertical section cranks the platforming difficulty up a notch.</li>
         </ul>
+        <p><a href="https://youtu.be/pU6Cap8lly0">Watch Desert or Mountain? on YouTube</a></p>
+        <h4 id="awesome-madness">Awesome Madness (Custom Geometry Dash Level based on Stereo Madness) (ID: 48346053) (8/18/2018)</h4>
+        <ul>
+            <li>Made a Geometry Dash level inspired by <em>Stereo Madness</em>.</li>
+            <li><em>Stereo Madness is the easiest level in the game, song by ForeverBound.</em></li>
+        </ul>
+        <p><a href="media/videos/awesomeMadness-4K.mp4" download>Download Video of Awesome Madness (MP4, ~100 MB)</a></p>
     </section>
     <section id="contact"><h2>Contact Me</h2>
         <p>You may contact me at [first name] [last name] [dot] dev [at] gmail [dot] com. (no spaces)</p>
