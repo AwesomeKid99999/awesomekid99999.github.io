@@ -11,7 +11,7 @@ It’s designed for fast performance, accessibility, and compatibility with both
 - Tested on a wide range of browsers, including older versions for backward compatibility.
 
 ## Hosting
-Deployed via GitHub Pages at https://awesomekid99999.github.io￼.
+Deployed via GitHub Pages at https://awesomekid99999.github.io.
 
 ## Run Locally
 If you want to preview the site locally:
