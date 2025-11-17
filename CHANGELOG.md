@@ -45,3 +45,5 @@ Unreal Engine Obstacle Course projects. Added a Contact Form and About Me conten
 featured projects to the Portfolio page.
 
 November 15, 2025 – Removed the Archive page to focus on current projects. Removed footer trademarks.
+
+November 16, 2025 - Removed raw videos from the Portfolio page and repository to improve load times; replaced with YouTube embeds.
