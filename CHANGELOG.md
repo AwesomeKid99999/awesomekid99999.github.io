@@ -47,3 +47,5 @@ featured projects to the Portfolio page.
 November 15, 2025 – Removed the Archive page to focus on current projects. Removed footer trademarks.
 
 November 16, 2025 - Removed raw videos from the Portfolio page and repository to improve load times; replaced with YouTube embeds.
+
+January 27, 2026 - Readded the Archive page to focus on more casual website use.
