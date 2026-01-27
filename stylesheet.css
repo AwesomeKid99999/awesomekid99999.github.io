@@ -1,3 +1,6 @@
+* {
+  min-height: 100%;
+}
 
 @font-face {
   font-family: 'OpenDyslexic';
@@ -10,8 +13,10 @@
 }
 
 :root {
-  --bg-light: #ffffff;
-  --bg-dark:  #000000;
+  --bg-light: #ccffcc;
+  --bg-light-gradient: linear-gradient(135deg, #bbffbb, #bbffff);
+  --bg-dark:  #003300;
+  --bg-dark-gradient: linear-gradient(135deg, #004400, #004444);
   --text-light: #000000;
   --text-dark:  #ffffff;
   --hc-bg: #000;         /* absolute black */
@@ -24,6 +29,7 @@
 
 body {
   background-color: var(--bg-light);
+  background: var(--bg-light-gradient);
   color: var(--text-light);
   font-family: system-ui, sans-serif;
 }
@@ -31,16 +37,19 @@ body {
 @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--bg-dark);
+    background: var(--bg-dark-gradient);
     color: var(--text-dark);
   }
 }
 
 body.light {
   background-color: var(--bg-light);
+  background: var(--bg-light-gradient);
   color: var(--text-light);
 }
 body.dark {
   background-color: var(--bg-dark);
+  background: var(--bg-dark-gradient);
   color: var(--text-dark);
 }
 
@@ -75,7 +84,9 @@ body.high-contrast.hc-light {
 }
 
 /* Nuke low-contrast effects */
-body.high-contrast * {
+body.high-contrast, body.light.high-contrast, body.dark.high-contrast * {
+  background-color: var(--hc-bg) !important;
+  background: var(--hc-bg) !important;
   box-shadow: none !important;
   text-shadow: none !important;
   /* Kill transitions so color changes are instant & readable */
@@ -223,4 +234,5 @@ header {
 /*.font-dyslexic {*/
 /*  font-family: 'OpenDyslexic', sans-serif;*/
 /*}*/
+
 
