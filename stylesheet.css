@@ -27,6 +27,10 @@
   --hc-danger: #ff00ff;  /* magenta alt accent (optional) */
 }
 
+body.social * {
+  text-transform: lowercase;
+}
+
 body {
   background-color: var(--bg-light);
   background: var(--bg-light-gradient);
