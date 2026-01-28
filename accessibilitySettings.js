@@ -4,16 +4,19 @@
     var COLOR_ID = "display-colors";
     var FONT_ID  = "dyslexia-friendly-font";
     var CONTRAST_ID = "contrast";
+    var TIME_FORMAT_ID = "time-format";
 
     var THEME_KEY = "theme-preference";   // 'system' | 'light' | 'dark'
     var COLOR_KEY = "color-mode";         // 'normal' | 'invert-colors' | 'grayscale'
     var FONT_KEY  = "font-dyslexic";      // 'enabled' | 'disabled'
     var CONTRAST_KEY = "a11y-contrast";   // 'on' | 'off'
+    var TIME_FORMAT_KEY = "time-format";  // '24h' | '12h'
 
     var themeSel = document.getElementById(THEME_ID);
     var colorSel = document.getElementById(COLOR_ID);
     var fontSel  = document.getElementById(FONT_ID);
     var contrastSel = document.getElementById(CONTRAST_ID);
+    var timeFormatSel = document.getElementById(TIME_FORMAT_ID);
     var body = document.body;
     var root = document.documentElement;
 
@@ -83,6 +86,7 @@
     var savedColor    = lsGet(COLOR_KEY)    || "normal";
     var savedFont     = lsGet(FONT_KEY)     || "disabled";
     var savedContrast = lsGet(CONTRAST_KEY) || "off";
+    var savedTimeFormat = lsGet(TIME_FORMAT_KEY) || "24h";
 
     applyTheme(savedTheme);
     applyColors(savedColor);
@@ -93,6 +97,10 @@
     if (colorSel)    colorSel.value    = savedColor;
     if (fontSel)     fontSel.value     = savedFont;
     if (contrastSel) contrastSel.value = savedContrast;
+    if (timeFormatSel) timeFormatSel.value = savedTimeFormat;
+
+    // Initialize time format in time.js if it's loaded
+    if (window.setTimeFormat) window.setTimeFormat(savedTimeFormat);
 
     // ===== EVENT HELPERS (IE8- style) =====
     function onChange(el, fn) {
@@ -125,6 +133,13 @@
         var themePref = lsGet(THEME_KEY) || "system";
         applyContrast(val, themePref);
         lsSet(CONTRAST_KEY, val);
+    });
+
+    onChange(timeFormatSel, function(){
+        var val = timeFormatSel && timeFormatSel.value ? timeFormatSel.value : "24h";
+        lsSet(TIME_FORMAT_KEY, val);
+        // Trigger time format update if available
+        if (window.updateTimeFormat) window.updateTimeFormat(val);
     });
 
     // ===== SYSTEM THEME LISTENER (no-ops on XP/IE) =====

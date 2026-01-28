@@ -9,17 +9,28 @@
         // Simple pad function
         function pad2(n){ return (n < 10 ? "0" : "") + n; }
         var WDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        
+        var __legacyHour12 = false; // false = 24h, true = 12h
 
         function fmtDateTime(d) {
-
-
             var yyyy = d.getFullYear();
             var mm = pad2(d.getMonth() + 1);
             var dd = pad2(d.getDate());
             var hh = d.getHours();
             var mi = pad2(d.getMinutes());
             var ss = pad2(d.getSeconds());
-            return WDAYS[d.getDay()] + ", " + mm + "/" + dd + "/" + yyyy + " " + hh + ":" + mi + ":" + ss ;
+            
+            var timeStr;
+            if (__legacyHour12) {
+              var h12 = hh % 12 || 12; // 0 becomes 12
+              var ampm = hh < 12 ? "AM" : "PM";
+              timeStr = pad2(h12) + ":" + mi + ":" + ss + " " + ampm;
+            } else {
+              timeStr = pad2(hh) + ":" + mi + ":" + ss;
+            }
+            
+            return WDAYS[d.getDay()] + ", " + MONTHS[d.getMonth()] + " " + dd + ", " + yyyy + " at " + timeStr;
         }
 
         function setTextLegacy(id, text){
@@ -48,23 +59,59 @@
             });
         }
         window.onload = legacyRender;
+        
+        // Legacy support for time format toggle
+        window.setTimeFormat = function(format) {
+            __legacyHour12 = format === "12h";
+            legacyRender();
+        };
+        
+        window.updateTimeFormat = function(format) {
+            __legacyHour12 = format === "12h";
+            legacyRender();
+        };
+        
+        // Initialize from localStorage on load
+        try {
+            var stored = localStorage.getItem("time-format");
+            if (stored === "12h") {
+                __legacyHour12 = true;
+            }
+        } catch(e) {}
+        
         return; // stop here for legacy
     }
 
   // ===== Modern path below =====
   // Consistent formatters for both your local time and LA time
-    const LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-    });
+  let __hour12 = false; // false = 24h, true = 12h
+  let __userTimezone = null; // will be set from IP geolocation
 
-    const LA_FMT = new Intl.DateTimeFormat("en-US", {
+  function initTimeFormat() {
+    try {
+      const stored = localStorage.getItem("time-format");
+      __hour12 = stored === "12h";
+    } catch (e) {
+      __hour12 = false;
+    }
+  }
+
+  function detectUserTimezone() {
+    return fetch("https://ipapi.co/json/")
+      .then(res => res.json())
+      .then(data => {
+        __userTimezone = data.timezone || null;
+        return __userTimezone;
+      })
+      .catch(err => {
+        console.warn("Failed to detect timezone from IP:", err);
+        return null;
+      });
+  }
+
+  function createFormatters() {
+    const formatters = {
+      LA_FMT: new Intl.DateTimeFormat("en-US", {
         timeZone: "America/Los_Angeles",
         weekday: "long",
         year: "numeric",
@@ -73,8 +120,40 @@
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
-        hour12: false
-    });
+        hour12: __hour12
+      })
+    };
+
+    // If we have user's timezone, use it; otherwise use browser's local time
+    if (__userTimezone) {
+      formatters.LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
+        timeZone: __userTimezone,
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: __hour12
+      });
+    } else {
+      formatters.LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: __hour12
+      });
+    }
+
+    return formatters;
+  }
+
+  let formatters = createFormatters();
 
   // Website creation moment (in milliseconds since epoch)
   const CREATED_AT_MS = 1757381230000; // adjust if needed
@@ -129,11 +208,21 @@
     if (updatedEl) updatedEl.textContent = document.lastModified;
 
     const yourEl = document.getElementById("your-time");
-    if (yourEl) yourEl.textContent = LOCAL_FMT.format(now);
+    if (yourEl) yourEl.textContent = formatters.LOCAL_FMT.format(now);
 
     const myEl = document.getElementById("my-time");
-    if (myEl) myEl.textContent = LA_FMT.format(now);
+    if (myEl) myEl.textContent = formatters.LA_FMT.format(now);
   }
+  window.updateTimeFormat = function(format) {
+    __hour12 = format === "12h";
+    formatters = createFormatters();
+    update();
+  };
+
+  window.setTimeFormat = function(format) {
+    __hour12 = format === "12h";
+    formatters = createFormatters();
+  };
 
   window.addEventListener("DOMContentLoaded", () => {
       function startClock() {
@@ -141,8 +230,22 @@
           setInterval(update, 1000);
       }
 
-      // If fetch/Promises aren’t available, just start the clock without server sync
+      // Initialize time format from localStorage
+      initTimeFormat();
+      
+      // Detect user's timezone from IP, then setup formatters
+      detectUserTimezone().then(() => {
+          formatters = createFormatters();
+          startClock();
+      }).catch(() => {
+          // Fallback: just start without timezone detection
+          formatters = createFormatters();
+          startClock();
+      });
+
+      // If fetch/Promises aren't available, just start the clock without server sync
       if (!(window.fetch && window.Promise)) {
+          formatters = createFormatters();
           startClock();
           return;
       }
