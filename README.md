@@ -1,6 +1,6 @@
 # Personal Portfolio Website
 
-This is my personal portfolio website, built to showcase my programming, design, and creative projects.
+This is my personal website, built to showcase my programming, design, and creative projects.
 It’s designed for fast performance, accessibility, and compatibility with both modern and legacy browsers.
 
 ## Features
