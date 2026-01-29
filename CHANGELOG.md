@@ -49,3 +49,5 @@ November 15, 2025 – Removed the Archive page to focus on current projects. Rem
 November 16, 2025 - Removed raw videos from the Portfolio page and repository to improve load times; replaced with YouTube embeds.
 
 January 27, 2026 - Readded the Archive page to focus on more casual website use.
+
+January 28-29, 2026 - Renamed Portfolio to Projects (sorry recruiters!), changed about me page to be more casual, removed recruiters from contact page. and added 12/24 hour time toggle.
