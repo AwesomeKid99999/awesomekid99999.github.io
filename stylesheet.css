@@ -166,7 +166,7 @@ body.high-contrast textarea {
 }
 
 /* Your green “button” link variant: keep it readable */
-body.high-contrast a.button {
+body.high-contrast a.button, body.high-contrast a.social-link {
   background: transparent !important;
   border: 2px solid var(--hc-fg) !important;
   color: var(--hc-fg) !important;
@@ -238,6 +238,39 @@ a.button:hover {
   text-decoration: none;
 }
 
+a.social-link {
+  display: inline-flex;             /* center content horizontally/vertically */
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.5em 0.75em;
+  background: #00cc00;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  min-width: 0;
+}
+
+a.button:visited,
+a.social-link:visited {
+  color: #ffffff;
+}
+
+a.button:hover,
+a.social-link:hover {
+  background: #00aa00;
+  text-decoration: none;
+}
+
+/* Page-specific fixed-width buttons: only apply on the Links page */
+/* Only the social links on the Links page should be fixed width (nav buttons unchanged) */
+a.social-link {
+  width: 600px;
+  margin: 0.25rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
 
 header, footer, section, nav, main, article {
   display: block;
@@ -328,6 +361,7 @@ nav.nav-right a.button {
     padding: 0.75rem 0.5rem;
     font-size: 1.05rem;
     text-align: center;
+    width: auto; /* allow full-width on mobile */
   }
 
   /* Make settings controls more compact and readable */
@@ -346,6 +380,7 @@ nav.nav-right a.button {
     align-self: center;
     text-align: center;
     min-width: 120px;
+    width: auto; /* allow flexible width on mobile */
   }
 
   /* Show labels on small screens so users can see which control does what.
@@ -372,4 +407,18 @@ nav.nav-right a.button {
   .field label {
     text-align: center;
   }
+
+  /* Make social links flexible on small screens so they don't overflow */
+
+  /* Place the lightweight link full width under settings */
+    a.social-link {
+      width: 90%;
+      margin: 0.25rem;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+
 }
