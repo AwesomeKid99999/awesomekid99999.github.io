@@ -249,6 +249,7 @@ a.social-link {
   text-decoration: none;
   font-weight: bold;
   min-width: 0;
+  height: 4em;
 }
 
 a.button:visited,
@@ -411,13 +412,13 @@ nav.nav-right a.button {
   /* Make social links flexible on small screens so they don't overflow */
 
   /* Place the lightweight link full width under settings */
-    a.social-link {
-      width: 90%;
-      margin: 0.25rem;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-    }
+  a.social-link {
+    width: 90%;
+    margin: 0.25rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 
 
