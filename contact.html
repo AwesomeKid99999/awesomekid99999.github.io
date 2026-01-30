@@ -48,21 +48,22 @@
 </header>
 <main id ="main">
   <h1>Contact Me</h1>
-  <p>If you'd like to talk about projects, collaboration, or anything else, you can send me a message here.</p>
+  <!-- More casual intro -->
+  <p>Got an idea or wanna chat? Shoot me a quick message below or DM me on Discord: AwesomeKid99999#5063.</p>
 
     <form id="contact-form" method="POST" action="https://formspree.io/f/xqawedrd">
       <!-- Real fields -->
       <label for="name">Name (required)</label><br>
-      <input type="text" id="name" name="name" required><br>
+      <input type="text" id="name" name="name" placeholder="Your name" required><br>
 
       <label for="email">Email (required)</label><br>
-      <input type="email" id="email" name="email" required><br>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required><br>
 
       <label for="subject">Subject</label><br>
-      <input type="text" id="subject" name="subject" maxlength="120"><br>
+      <input type="text" id="subject" name="subject" maxlength="120" placeholder="What's this about?"><br>
 
       <label for="message">Message (required)</label><br>
-      <textarea id="message" name="message" rows="5" required></textarea>
+      <textarea id="message" name="message" rows="5" required placeholder="Tell me what's up..."></textarea>
 
       <!-- Honeypot (spam trap) -->
       <div style="display:none;">
@@ -73,73 +74,73 @@
       <!-- Status messages -->
       <p id="form-status" aria-live="polite"></p>
 
-      <button type="submit">Send Message</button>
+      <button type="submit">Send</button>
     </form>
-  <script>
-    (function () {
-      const form = document.getElementById('contact-form');
-      const status = document.getElementById('form-status');
+   <script>
+     (function () {
+       const form = document.getElementById('contact-form');
+       const status = document.getElementById('form-status');
 
-      if (!form) return;
+       if (!form) return;
 
-      form.addEventListener('submit', async function (event) {
-        event.preventDefault();
-        status.textContent = '';
+       form.addEventListener('submit', async function (event) {
+         event.preventDefault();
+         status.textContent = '';
 
-        // Honeypot: if this has a value, it's probably a bot
-        const honeypot = form.querySelector('input[name="website"]');
-        if (honeypot && honeypot.value.trim() !== '') {
+         // Honeypot: if this has a value, it's probably a bot
+         const honeypot = form.querySelector('input[name="website"]');
+         if (honeypot && honeypot.value.trim() !== '') {
           // Silently fail for bots
-          status.textContent = 'Something went wrong. Please try again.';
-          return;
-        }
+          status.textContent = 'Looks like spam, try again.';
+           return;
+         }
 
-        // Basic front-end validation
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const message = form.message.value.trim();
+         // Basic front-end validation
+         const name = form.name.value.trim();
+         const email = form.email.value.trim();
+         const message = form.message.value.trim();
 
-        if (!name || !email || !message) {
-          status.textContent = 'Please fill out all required fields.';
-          return;
-        }
+         if (!name || !email || !message) {
+          status.textContent = 'Please fill in the required fields so I can get back to you.';
+           return;
+         }
 
-        // Very basic email sanity check
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-          status.textContent = 'Please enter a valid email address.';
-          return;
-        }
+         // Very basic email sanity check
+         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!emailPattern.test(email)) {
+          status.textContent = "That email doesn't look right.";
+           return;
+         }
 
-        status.textContent = 'Sending...';
+        status.textContent = 'Sending, hang tight...';
 
-        try {
-          const formData = new FormData(form);
-          const response = await fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: {
-              'Accept': 'application/json'
-            }
-          });
+         try {
+           const formData = new FormData(form);
+           const response = await fetch(form.action, {
+             method: form.method,
+             body: formData,
+             headers: {
+               'Accept': 'application/json'
+             }
+           });
 
-          if (response.ok) {
-            status.textContent = 'Thanks! Your message has been sent.';
-            form.reset();
-          } else {
-            status.textContent = 'Oops, there was a problem sending your message.';
-          }
-        } catch (err) {
-          console.error(err);
-          status.textContent = 'Network error. Please try again later.';
-        }
-      });
-    })();
-  </script>
+           if (response.ok) {
+             status.textContent = "Thanks, I got your message! I'll reply as soon as I can.";
+             form.reset();
+           } else {
+             status.textContent = "Hmm, couldn't send. Try again later.";
+           }
+         } catch (err) {
+           console.error(err);
+           status.textContent = 'Network error. Try again later.';
+         }
+       });
+     })();
+   </script>
   <noscript>
     <p>
-      Your browser doesn’t support this contact form.
-      Please email me at: <span>[first name] [last name] [dot] dev [at] gmail [dot] com</span>
+      Hey, looks like JavaScript is off. You can email me at <span>[first name] [last name] [dot] dev [at] gmail [dot] com</span>
+      or hit me up on Discord: AwesomeKid99999#5063.
     </p>
   </noscript>
 </main>
