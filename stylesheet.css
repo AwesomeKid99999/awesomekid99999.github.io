@@ -29,17 +29,40 @@
 
 body.social * {
   text-transform: lowercase;
+  text-align: center;
 }
 
-h2.social {
-  margin-top: 2rem;
-  line-height: 0;
+/* Replace per-element borders with a single box around each .social container */
+div.social {
+  border: 2px solid #00cc00;
+  padding: 1rem;
+  margin: 1rem auto;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05); /* subtle background to make the box stand out */
+  box-sizing: border-box;
+  text-align: left; /* keep content aligned normally inside the box */
 }
 
-h3.social {
-  margin-bottom: -0.75rem; /* reduced space under the heading */
-  line-height: 1rem;
+/* Small vertical spacing for direct children inside the social box */
+div.social > * {
+  margin: 0.35rem 0;
 }
+
+/* High-contrast adjustment: use HC colors for the box */
+body.high-contrast div.social {
+  border-color: var(--hc-fg) !important;
+  background: var(--hc-bg) !important;
+}
+
+/*h2.social {*/
+/*  margin-top: 2rem;*/
+/*  line-height: 0;*/
+/*}*/
+
+/*h3.social {*/
+/*  margin-bottom: -0.75rem; !* reduced space under the heading *!*/
+/*  line-height: 1rem;*/
+/*}*/
 
 body {
   background-color: var(--bg-light);
@@ -245,8 +268,108 @@ header {
   padding: 10px 20px;
 }
 
-/*.font-dyslexic {*/
-/*  font-family: 'OpenDyslexic', sans-serif;*/
-/*}*/
+/* Make the right-side nav a flex row so selects and the button align */
+nav.nav-right {
+  display: flex;
+  align-items: flex-end; /* align children to the bottom so the button lines up with selects */
+  gap: 0.5rem;
+  flex-wrap: wrap; /* allow wrapping on narrow screens */
+}
 
+/* Keep the right-side button vertically aligned with the controls */
+nav.nav-right a.button {
+  align-self: center;
+}
 
+/* Field wrapper for label+control pairs in the header */
+.field {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0 0.4rem;
+}
+
+.field label {
+  font-size: 0.9rem;
+  line-height: 1;
+  display: block;
+}
+
+.field select {
+  min-width: 10ch;
+}
+
+/* Responsive navbar: improve layout and touch targets on small screens */
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Make both nav bars span full width and wrap neatly */
+  nav.nav-left,
+  nav.nav-right {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: flex-end; /* keep button aligned with dropdowns on small screens */
+    box-sizing: border-box;
+    padding: 0 0.25rem;
+  }
+
+  /* Turn nav links into large, finger-friendly blocks */
+  nav.nav-left a.button {
+    flex: 1 1 100%; /* full width items stacked */
+    padding: 0.75rem 0.5rem;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  /* Make settings controls more compact and readable */
+  nav.nav-right select {
+    flex: 1 1 48%;
+    min-width: 120px;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* Place the lightweight link full width under settings */
+  nav.nav-right a.button {
+    flex: 1 1 48%; /* allow it to sit next to selects */
+    padding: 0.6rem;
+    margin-top: 0; /* remove extra top spacing so it aligns with selects */
+    align-self: center;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  /* Show labels on small screens so users can see which control does what.
+     Labels are displayed as compact blocks above their corresponding select. */
+  nav.nav-right { position: relative; }
+  nav.nav-right label {
+    position: static;
+    left: auto;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    display: block;
+    font-size: 0.92rem;
+    margin: 0.15rem 0 0.05rem;
+    text-align: center;
+    color: inherit;
+  }
+
+  .field {
+    flex: 1 1 48%;
+    align-items: stretch;
+  }
+
+  .field label {
+    text-align: center;
+  }
+}

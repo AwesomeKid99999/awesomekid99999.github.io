@@ -55,3 +55,5 @@ January 28-29, 2026 - Renamed Portfolio to Projects (sorry recruiters!), changed
 January 30, 2026 - Reworded the intro in the Projects/Archive pages to be more casual,
 added Discord as a contact option, and made contact page more casual. Added horizontal bar before footer.
 Added content for the social about me page.
+Centered text in social pages.
+Added more mobile-friendly layout for all pages.

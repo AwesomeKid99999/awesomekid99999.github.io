@@ -10,41 +10,46 @@
 </head>
 <body class="social">
 <a class="skip-link" href="#main">Skip to main content</a>
-<header>
+<header class="social">
   <nav class="nav-left">
     <a href="index.html" class="button">Home</a>
     <a href="about-me.html" class="button">About Me</a>
     <a href="links.html" class="button">Links</a>
   </nav>
   <nav class="nav-right">
-    <label for="contrast">High Contrast:</label>
-    <select id="contrast">
-      <option value="off">Off</option>
-      <option value="on">On</option>
-    </select>
-    <label for="display-colors">Display Colors:</label>
-    <select id="display-colors">
-      <option value="normal">Normal</option>
-      <option value="invert-colors">Invert Colors</option>
-      <option value="grayscale">Grayscale</option>
-    </select>
-    <label for="dyslexia-friendly-font">Dyslexia-Friendly Font:</label>
-    <select id="dyslexia-friendly-font">
-      <option value="disabled">Disabled</option>
-      <option value="enabled">Enabled</option>
-    </select>
-    <label for="theme">Theme:</label>
-    <select id="theme">
-      <option value="system">System</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-        <label for="time-format">Time Format:</label>
-          <select id="time-format">
-              <option value="24h">24-Hour</option>
-              <option value="12h">12-Hour</option>
-          </select>
-          <a href="../index.html" class="button" onclick="return confirm('heading out? just use ur back button, check my socials, or the about me page in the main site if u wanna return!')">View Main Site</a>
+    <div class="field"><label for="contrast">High Contrast:</label>
+      <select id="contrast">
+        <option value="off">Off</option>
+        <option value="on">On</option>
+      </select>
+    </div>
+    <div class="field"><label for="display-colors">Display Colors:</label>
+      <select id="display-colors">
+        <option value="normal">Normal</option>
+        <option value="invert-colors">Invert Colors</option>
+        <option value="grayscale">Grayscale</option>
+      </select>
+    </div>
+    <div class="field"><label for="dyslexia-friendly-font">Dyslexia-Friendly Font:</label>
+      <select id="dyslexia-friendly-font">
+        <option value="disabled">Disabled</option>
+        <option value="enabled">Enabled</option>
+      </select>
+    </div>
+    <div class="field"><label for="theme">Theme:</label>
+      <select id="theme">
+        <option value="system">System</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+    <div class="field"><label for="time-format">Time Format:</label>
+      <select id="time-format">
+        <option value="24h">24-Hour</option>
+        <option value="12h">12-Hour</option>
+      </select>
+    </div>
+    <a href="../index.html" class="button" onclick="return confirm('heading out? just use ur back button, check my socials, or the about me page in the main site if u wanna return!')">View Main Site</a>
   </nav>
 </header>
 <main id="main">
@@ -55,10 +60,10 @@
 </main>
 <hr>
 <footer>
-  <p>It's currently <span id="your-time"></span> for you and <span id="my-time"></span> for me.
+  <p>It's currently <span id="your-time"></span> for you and <span id="my-time"></span> for me
   <br>
     &copy; 2026 AwesomeKid99999. All rights reserved. Last updated: <span id ="last-updated-since"></span> (your local date/time)<br>
-    This website was built <span id="under-construction-since">______</span>.
+    website built <span id="under-construction-since">______</span>!
   </p>
 </footer>
 <script src="../time.js"></script>
