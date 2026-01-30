@@ -51,3 +51,7 @@ November 16, 2025 - Removed raw videos from the Portfolio page and repository to
 January 27, 2026 - Readded the Archive page to focus on more casual website use.
 
 January 28-29, 2026 - Renamed Portfolio to Projects (sorry recruiters!), changed about me page to be more casual, removed recruiters from contact page. and added 12/24 hour time toggle.
+
+January 30, 2026 - Reworded the intro in the Projects/Archive pages to be more casual,
+added Discord as a contact option, and made contact page more casual. Added horizontal bar before footer.
+Added content for the social about me page.

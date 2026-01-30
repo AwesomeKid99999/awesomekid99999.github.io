@@ -31,6 +31,16 @@ body.social * {
   text-transform: lowercase;
 }
 
+h2.social {
+  margin-top: 2rem;
+  line-height: 0;
+}
+
+h3.social {
+  margin-bottom: -0.75rem; /* reduced space under the heading */
+  line-height: 1rem;
+}
+
 body {
   background-color: var(--bg-light);
   background: var(--bg-light-gradient);

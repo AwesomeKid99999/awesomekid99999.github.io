@@ -49,11 +49,161 @@
   </header>
   <main id="main">
           <h1>All about me!</h1>
-      <p>
-          carrd.co content will be copied here in the future!
-      </p>
+      <div>
+          <h2 class="social">
+              <u><em>basic info</em></u>
+          </h2>
+          <p>
+              <strong>irl name:</strong> andy<br>
+              <strong>preferred names:</strong> <em>awesome</em> or <em>andy</em> but honestly it doesn't matter<br>
+              <strong>age:</strong> <span id="age-info" data-birth="1092927600"></span><br>
+              <strong>birthday:</strong> august 19th<br>
+              <strong>gender:</strong> male<br>
+              <strong>pronouns:</strong> he/him<br>
+              <strong>mbti:</strong> isfp-t<br>
+              <strong>enneagram type:</strong> 9w1<br>
+              <strong>sexuality:</strong> aroace?<br>
+          </p>
+      </div>
+      <div>
+          <h2 class="social">
+              <u><em>interests</em></u>
+          </h2>
+          <p>
+              creative & rhythm-based games<br>
+              mario<br>
+              geometry dash<br>
+              minecraft<br>
+              roblox<br>
+              project sekai / osu! / bandori (on & off)<br>
+              tinkering with old tech<br>
+              diy electronics<br>
+              coding & web development<br>
+          </p>
+      </div>
+      <div>
+          <h2 class="social">
+              <u><em>likes and dislikes</em></u>
+          </h2>
+          <h3 class="social"><u>likes:</u></h3>
+          <p>
+              quiet environments<br>
+              deep conversations<br>
+              creative projects<br>
+              learning by doing<br>
+              tinkering & problem-solving<br>
+              cozy setups<br>
+              friends<br>
+              playing games<br>
+              making youtube content<br>
+              traveling<br>
+          </p>
+          <h3 class="social"><u>dislikes:</u></h3>
+          <p>
+              loud or chaotic spaces<br>
+              forced small talk<br>
+              unnecessary pressure<br>
+              unclear expectations<br>
+              toxic competitiveness<br>
+              annoying people<br>
+              bullies<br>
+          </p>
+      </div>
+      <div>
+          <h2 class="social">
+              <u><em>byi (before you interact)</em></u>
+          </h2>
+          <p>
+              i'm a pretty sensitive person, so please be kind.<br>
+              sometimes i need things explained a bit more clearly, and that's okay.<br>
+              i may repeat myself occasionally.<br>
+              i'm autistic, so clear communication and patience help a lot.
+          </p>
+          <h2 class="social">
+              <u><em>dni (do not interact)</em></u>
+          </h2>
+          <p>
+              racism<br>
+              ableism<br>
+              homophobia<br>
+              hate speech<br>
+              bullying<br>
+              generally toxic behavior<br>
+          </p>
+      </div>
+      <script>
+        (function () {
+          // Parse birth input: accept only Unix timestamps (seconds or milliseconds)
+          function parseBirthInput(input) {
+            if (!input) return null;
+            input = input.trim();
+
+            // Only accept pure numeric Unix timestamps now
+            if (/^\d+$/.test(input)) {
+              try {
+                var n = parseInt(input, 10);
+                // Heuristic: treat numbers >= 1e12 as milliseconds, otherwise seconds
+                if (input.length >= 13 || n > 1e12) {
+                  return new Date(n);
+                } else {
+                  return new Date(n * 1000);
+                }
+              } catch (e) {
+                return null;
+              }
+            }
+
+            // All other formats are unsupported
+            return null;
+          }
+
+          function computeYearsFromTimestamp(birth, now) {
+            var years = now.getFullYear() - birth.getFullYear();
+            // Construct this-year birthday at the exact birth time
+            var thisYearBirthday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate(), birth.getHours(), birth.getMinutes(), birth.getSeconds(), birth.getMilliseconds());
+            if (now < thisYearBirthday) years -= 1;
+            return years;
+          }
+
+
+
+          function init() {
+            var el = document.getElementById('age-info');
+            if (!el) return;
+            var birthInput = (el.getAttribute('data-birth') || '').trim();
+
+            if (!birthInput) {
+              el.textContent = '(set your birthdate: add data-birth="<unix-seconds>" or "<unix-ms>")';
+              return;
+            }
+
+            var parsed = parseBirthInput(birthInput);
+            if (!parsed) {
+              el.textContent = '(invalid input — use a Unix timestamp in seconds or milliseconds)';
+               return;
+             }
+
+            function update() {
+              var now = new Date();
+              var years = computeYearsFromTimestamp(parsed, now);
+              el.textContent = years + (years === 1 ? ' year old' : ' years old');
+            }
+
+            update();
+            // Keep the timestamp accurate to the second
+            setInterval(update, 1000);
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+          } else {
+            init();
+          }
+         })();
+       </script>
       </main>
-     <footer>
+  <hr>
+  <footer>
       <p>It's currently <span id="your-time"></span> for you and <span id="my-time"></span> for me.
           <br>
           &copy; 2026 AwesomeKid99999. All rights reserved. Last updated: <span id ="last-updated-since"></span> (your local date/time)<br>
