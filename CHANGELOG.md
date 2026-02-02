@@ -57,3 +57,5 @@ added Discord as a contact option, and made contact page more casual. Added hori
 Added content for the social about me page.
 Centered text in social pages.
 Added more mobile-friendly layout for all pages.
+
+February 1, 2026 - Hid "Skip to main content" link.

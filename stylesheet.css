@@ -273,6 +273,34 @@ a.social-link {
   align-items: center;
 }
 
+a.skip-link {
+  position: absolute;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+a.skip-link:focus {
+  
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  padding: 0.5rem;
+  background: #00cc00;
+  color: #fff;
+  z-index: 1000;
+  text-decoration: none;
+ font-weight: bold;
+}
+
+body.high-contrast a.skip-link:focus {
+  background: var(--hc-bg) !important;
+  color: var(--hc-fg) !important;
+  border: 2px solid var(--hc-accent) !important;
+}
+
 header, footer, section, nav, main, article {
   display: block;
 }
