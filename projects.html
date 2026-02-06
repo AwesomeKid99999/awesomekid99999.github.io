@@ -38,11 +38,24 @@
               <option value="enabled">Enabled</option>
           </select>
         </div>
+                <div class="field"><label for="underline-links">Underline Links:</label>
+                    <select id="underline-links">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                    </select>
+                </div>
+                <div class="field"><label for="text-outline">Text Outline:</label>
+                    <select id="text-outline">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                    </select>
+                </div>
         <div class="field"><label for="theme">Theme:</label>
           <select id="theme">
               <option value="system">System</option>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
+                        <option value="custom">Custom</option>
           </select>
         </div>
         <div class="field"><label for="time-format">Time Format:</label>
@@ -50,6 +63,68 @@
               <option value="24h">24-Hour</option>
               <option value="12h">12-Hour</option>
           </select>
+        </div>
+        <div class="field">
+                <details class="custom-theme-panel">
+                    <summary>Custom Theme</summary>
+                    <div class="custom-theme-controls">
+                        <div class="field"><label for="custom-gradient-mode">Gradient Mode:</label>
+                            <select id="custom-gradient-mode">
+                                <option value="basic">Basic</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div class="field"><label for="custom-gradient-count">Stops:</label>
+                            <select id="custom-gradient-count">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="field"><label for="custom-bg">Background:</label>
+                            <input type="color" id="custom-bg" value="#ccffcc" aria-label="Custom Background Color">
+                        </div>
+                        <div class="field"><label for="custom-bg-2">Background 2:</label>
+                            <input type="color" id="custom-bg-2" value="#bbffff" aria-label="Custom Background Gradient Color">
+                        </div>
+                        <div class="field"><label for="custom-bg-3">Background 3:</label>
+                            <input type="color" id="custom-bg-3" value="#bbffbb" aria-label="Custom Background Gradient Color 3">
+                        </div>
+                        <div class="field"><label for="custom-bg-4">Background 4:</label>
+                            <input type="color" id="custom-bg-4" value="#bbffdd" aria-label="Custom Background Gradient Color 4">
+                        </div>
+                        <div class="field"><label for="custom-bg-5">Background 5:</label>
+                            <input type="color" id="custom-bg-5" value="#bbddff" aria-label="Custom Background Gradient Color 5">
+                        </div>
+                        <div class="field"><label for="custom-gradient-stops">Stops (advanced):</label>
+                            <textarea id="custom-gradient-stops" rows="2" aria-label="Custom Gradient Stops">#ccffcc, #bbffff, #bbffbb</textarea>
+                        </div>
+                        <div class="field"><label for="custom-text">Text:</label>
+                            <input type="color" id="custom-text" value="#000000" aria-label="Custom Text Color">
+                        </div>
+                        <div class="field"><label for="custom-link">Links:</label>
+                            <input type="color" id="custom-link" value="#0077cc" aria-label="Custom Link Color">
+                        </div>
+                        <div class="field"><label for="custom-underline">Underline:</label>
+                            <input type="color" id="custom-underline" value="#0077cc" aria-label="Custom Underline Color">
+                        </div>
+                        <div class="field"><label for="custom-outline">Outline:</label>
+                            <input type="color" id="custom-outline" value="#000000" aria-label="Custom Text Outline Color">
+                        </div>
+                        <div class="field"><label for="custom-accent">Accent:</label>
+                            <input type="color" id="custom-accent" value="#00cc00" aria-label="Custom Accent Color">
+                        </div>
+                        <div class="field"><label for="custom-gradient">Gradient:</label>
+                            <input type="checkbox" id="custom-gradient" checked aria-label="Enable Custom Background Gradient">
+                        </div>
+                        <div class="field"><label for="custom-gradient-angle">Angle:</label>
+                            <input type="number" id="custom-gradient-angle" value="135" min="0" max="360" step="1" aria-label="Custom Gradient Angle">
+                        </div>
+                        <button type="button" class="button" id="custom-theme-reset">Reset</button>
+                        <button type="button" class="button" id="custom-theme-random">Randomize</button>
+                    </div>
+                </details>
         </div>
         <a href="lightweight.html" class="button">View Lightweight Site</a>
     </nav>

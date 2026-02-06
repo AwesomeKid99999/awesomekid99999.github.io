@@ -13,9 +13,9 @@
 }
 
 :root {
-  --bg-light: #ccffcc;
+  --bg-light: #bbffbb;
   --bg-light-gradient: linear-gradient(135deg, #bbffbb, #bbffff);
-  --bg-dark:  #003300;
+  --bg-dark:  #004400;
   --bg-dark-gradient: linear-gradient(135deg, #004400, #004444);
   --text-light: #000000;
   --text-dark:  #ffffff;
@@ -34,7 +34,7 @@ body.social * {
 
 /* Replace per-element borders with a single box around each .social container */
 div.social {
-  border: 2px solid #00cc00;
+  border: 2px solid var(--custom-button-bg);
   padding: 1rem;
   margin: 1rem auto;
   border-radius: 8px;
@@ -71,14 +71,6 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: var(--bg-dark);
-    background: var(--bg-dark-gradient);
-    color: var(--text-dark);
-  }
-}
-
 body.light {
   background-color: var(--bg-light);
   background: var(--bg-light-gradient);
@@ -89,6 +81,9 @@ body.dark {
   background: var(--bg-dark-gradient);
   color: var(--text-dark);
 }
+
+
+
 
 body.font-dyslexic {
   font-family: 'OpenDyslexic', system-ui, sans-serif !important;
@@ -195,6 +190,10 @@ a:hover {
 
 a:visited {
   color: #FF00fF;
+}
+
+a:visited:hover {
+  color: #cc00cc;
 }
 
 a:active {
@@ -323,6 +322,204 @@ select:hover {
   background: #00aa00;
 }
 
+button.button {
+  display: inline-block;
+  padding: 0.5em;
+  background: #00cc00;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+button.button:hover {
+  background: #00aa00;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--bg-dark);
+    background: var(--bg-dark-gradient);
+    color: var(--text-dark);
+  }
+
+  body.text-outline {
+  text-shadow:
+    1px 0 0 rgba(0, 0, 0, 0.7),
+    -1px 0 0 rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(0, 0, 0, 0.7),
+    0 -1px 0 rgba(0, 0, 0, 0.7);
+  }
+}
+
+
+/* Custom theme overrides */
+body.custom-theme {
+  background-color: var(--custom-bg, #bbffbb);
+  background: var(--custom-bg-gradient, var(--custom-bg, #bbffbb));
+  color: var(--custom-text, #000000);
+}
+
+body.custom-theme a {
+  color: var(--custom-link, #0077cc);
+}
+
+body.custom-theme a:hover {
+  color: var(--custom-link-hover, #005599);
+}
+
+body.custom-theme a.button,
+body.custom-theme a.social-link,
+body.custom-theme select,
+body.custom-theme button.button {
+  background: var(--custom-button-bg, #00cc00);
+  color: var(--custom-button-text, #ffffff);
+}
+
+body.custom-theme a.button:hover,
+body.custom-theme a.social-link:hover,
+body.custom-theme select:hover,
+body.custom-theme button.button:hover {
+  background: var(--custom-button-hover, #00aa00);
+}
+
+/* Accessibility toggles */
+body.underline-links a:not(.button):not(.social-link) {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
+body.custom-theme.underline-links a:not(.button):not(.social-link) {
+  text-decoration-color: var(--custom-underline, currentColor);
+}
+
+body.text-outline  {
+  text-shadow:
+    1px 0 0 rgba(255, 255, 255, 0.7),
+    -1px 0 0 rgba(255, 255, 255, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.7),
+    0 -1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body.dark.text-outline {
+  text-shadow:
+    1px 0 0 rgba(0, 0, 0, 0.7),
+    -1px 0 0 rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(0, 0, 0, 0.7),
+    0 -1px 0 rgba(0, 0, 0, 0.7);
+}
+
+body.light.text-outline  {
+  text-shadow:
+    1px 0 0 rgba(255, 255, 255, 0.7),
+    -1px 0 0 rgba(255, 255, 255, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.7),
+    0 -1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body.custom-theme.text-outline,
+body.custom-theme.text-outline * {
+  text-shadow:
+    1px 0 0 var(--custom-outline, rgba(0, 0, 0, 0.7)),
+    -1px 0 0 var(--custom-outline, rgba(0, 0, 0, 0.7)),
+    0 1px 0 var(--custom-outline, rgba(0, 0, 0, 0.7)),
+    0 -1px 0 var(--custom-outline, rgba(0, 0, 0, 0.7));
+}
+
+body.text-outline input,
+body.text-outline select,
+body.text-outline textarea,
+body.text-outline button {
+  text-shadow: none;
+}
+
+body.text-outline a.button,
+body.text-outline a.social-link,
+body.text-outline select,
+body.text-outline button.button {
+  text-shadow:
+    1px 0 0 rgba(0, 0, 0, 0.85),
+    -1px 0 0 rgba(0, 0, 0, 0.85),
+    0 1px 0 rgba(0, 0, 0, 0.85),
+    0 -1px 0 rgba(0, 0, 0, 0.85);
+}
+
+body.custom-theme.text-outline a.button,
+body.custom-theme.text-outline a.social-link,
+body.custom-theme.text-outline select,
+body.custom-theme.text-outline button.button {
+  text-shadow:
+    1px 0 0 var(--custom-button-text-opposite, rgba(255, 255, 255, 0.85)),
+    -1px 0 0 var(--custom-button-text-opposite, rgba(255, 255, 255, 0.85)),
+    0 1px 0 var(--custom-button-text-opposite, rgba(255, 255, 255, 0.85)),
+    0 -1px 0 var(--custom-button-text-opposite, rgba(255, 255, 255, 0.85));
+}
+
+.custom-theme-panel {
+  display: none;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+body.custom-theme .custom-theme-panel {
+  display: block;
+}
+
+.custom-theme-panel summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 0.35rem;
+}
+
+.custom-theme-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.custom-theme-controls .field {
+  margin: 0;
+}
+
+input[type="color"] {
+  width: 3rem;
+  height: 2rem;
+  padding: 0;
+  border: 2px solid #ffffff;
+  background: transparent;
+  cursor: pointer;
+}
+
+.custom-theme-controls input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--custom-button-bg, #00cc00);
+  cursor: pointer;
+}
+
+.custom-theme-controls input[type="number"] {
+  width: 4.5rem;
+  padding: 0.2rem 0.35rem;
+  font-weight: bold;
+  border: 2px solid #ffffff;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.custom-theme-controls textarea {
+  min-width: 14rem;
+  min-height: 2.5rem;
+  padding: 0.35rem;
+  border: 2px solid #ffffff;
+  background: rgba(255, 255, 255, 0.85);
+  resize: vertical;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -361,6 +558,8 @@ nav.nav-right a.button {
 .field select {
   min-width: 10ch;
 }
+
+
 
 /* Responsive navbar: improve layout and touch targets on small screens */
 @media (max-width: 640px) {
@@ -431,6 +630,12 @@ nav.nav-right a.button {
   .field {
     flex: 1 1 48%;
     align-items: stretch;
+  }
+
+  /* Ensure custom theme panel sits on its own line on mobile */
+  .custom-theme-panel {
+    flex: 1 1 100%;
+    width: 100%;
   }
 
   .field label {

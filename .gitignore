@@ -1,0 +1,6 @@
+.DS_Store
+/private/
+.idea/
+.vscode/
+.venv/
+test.html
