@@ -61,3 +61,5 @@ Added more mobile-friendly layout for all pages.
 February 1, 2026 - Hid "Skip to main content" link.
 
 February 6, 2026 - Added Custom Themes, text outline, and underline links.
+
+February 7, 2026 - Added auto-changing copyright year for footer.

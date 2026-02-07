@@ -49,6 +49,7 @@
                 "UNDER CONSTRUCTION SINCE (Relative time unavailable on this browser)");
             setTextLegacy("last-updated-since",
                 "Last updated since (Relative time unavailable on this browser)");
+            setTextLegacy("copyright-year", now.getFullYear());
         }
 
         if (document.addEventListener) {
@@ -212,6 +213,9 @@
 
     const myEl = document.getElementById("my-time");
     if (myEl) myEl.textContent = formatters.LA_FMT.format(now);
+
+    const copyrightEl = document.getElementById("copyright-year");
+    if (copyrightEl) copyrightEl.textContent = now.getFullYear();
   }
   window.updateTimeFormat = function(format) {
     __hour12 = format === "12h";
