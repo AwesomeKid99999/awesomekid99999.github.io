@@ -358,13 +358,7 @@ button.button:hover {
     color: var(--text-dark);
   }
 
-  body.text-outline {
-  text-shadow:
-    1px 0 0 rgba(0, 0, 0, 0.7),
-    -1px 0 0 rgba(0, 0, 0, 0.7),
-    0 1px 0 rgba(0, 0, 0, 0.7),
-    0 -1px 0 rgba(0, 0, 0, 0.7);
-  }
+
 }
 
 
@@ -430,6 +424,16 @@ body.light.text-outline  {
     -1px 0 0 rgba(255, 255, 255, 0.7),
     0 1px 0 rgba(255, 255, 255, 0.7),
     0 -1px 0 rgba(255, 255, 255, 0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  body.text-outline {
+    text-shadow:
+      1px 0 0 rgba(0, 0, 0, 0.7),
+      -1px 0 0 rgba(0, 0, 0, 0.7),
+      0 1px 0 rgba(0, 0, 0, 0.7),
+      0 -1px 0 rgba(0, 0, 0, 0.7);
+  }
 }
 
 body.custom-theme.text-outline,
