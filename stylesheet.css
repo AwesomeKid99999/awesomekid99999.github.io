@@ -34,7 +34,7 @@ body.social * {
 
 /* Replace per-element borders with a single box around each .social container */
 div.social {
-  border: 2px solid var(--custom-button-bg);
+  border: 2px solid #00cc00;
   padding: 1rem;
   margin: 1rem auto;
   border-radius: 8px;
@@ -46,6 +46,19 @@ div.social {
 /* Small vertical spacing for direct children inside the social box */
 div.social > * {
   margin: 0.35rem 0;
+}
+
+/* Theme-aware border colors */
+body.light div.social {
+  border-color: #00cc00;
+}
+
+body.dark div.social {
+  border-color: #00cc00;
+}
+
+body.custom-theme div.social {
+  border-color: var(--custom-button-bg);
 }
 
 /* High-contrast adjustment: use HC colors for the box */
