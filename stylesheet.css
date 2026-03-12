@@ -1,5 +1,6 @@
 * {
   min-height: 100%;
+  font-family: system-ui, sans-serif;
 }
 
 @font-face {
@@ -81,8 +82,9 @@ body {
   background-color: var(--bg-light);
   background: var(--bg-light-gradient);
   color: var(--text-light);
-  font-family: system-ui, sans-serif;
 }
+
+
 
 body.light {
   background-color: var(--bg-light);
@@ -97,6 +99,11 @@ body.dark {
 
 
 
+div.code {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 
 body.font-dyslexic {
   font-family: 'OpenDyslexic', system-ui, sans-serif !important;
@@ -104,6 +111,12 @@ body.font-dyslexic {
 
 body.font-dyslexic * {
   font-family: inherit !important;
+}
+
+div.code, pre, code {
+  font-family: 'Courier New', Courier, monospace !important;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
 }
 
 .invert    { filter: invert(1); }
