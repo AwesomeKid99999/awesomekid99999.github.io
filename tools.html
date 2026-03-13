@@ -3,9 +3,9 @@
 <head>
   <link rel="stylesheet" href="stylesheet.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Me - AwesomeKid99999's website!</title>
-        <meta property="og:title" content="Contact Me - AwesomeKid99999's website!">
-      <meta property="og:description" content="Get in touch with Andy – he'd love to hear from you.">
+  <title>Tools - AwesomeKid99999's website!</title>
+        <meta property="og:title" content="Tools - AwesomeKid99999's website!">
+      <meta property="og:description" content="A collection of tools and resources made by Andy.">
           <meta name="theme-color" content="#00ff00"/>
 </head>
 <body>
@@ -128,110 +128,19 @@
     <a href="lightweight.html" class="button">View Lightweight Site</a>
   </nav>
 </header>
-<main id ="main">
-  <h1>Contact Me</h1>
-  <!-- More casual intro -->
-  <p>Got an idea or wanna chat? Shoot me a quick message below or DM me on Discord: AwesomeKid99999#5063.</p>
-
-    <form id="contact-form" method="POST" action="https://formspree.io/f/xqawedrd">
-      <!-- Real fields -->
-      <label for="name">Name (required)</label><br>
-      <input type="text" id="name" name="name" placeholder="Your name" required><br>
-
-      <label for="email">Email (required)</label><br>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required><br>
-
-      <label for="subject">Subject</label><br>
-      <input type="text" id="subject" name="subject" maxlength="120" placeholder="What's this about?"><br>
-
-      <label for="message">Message (required)</label><br>
-      <textarea id="message" name="message" rows="5" required placeholder="Tell me what's up..."></textarea>
-
-      <!-- Honeypot (spam trap) -->
-      <div style="display:none;">
-        <label for="website">Leave this field empty</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-      </div>
-
-      <!-- Status messages -->
-      <p id="form-status" aria-live="polite"></p>
-
-      <button type="submit">Send</button>
-    </form>
-   <script>
-     (function () {
-       const form = document.getElementById('contact-form');
-       const status = document.getElementById('form-status');
-
-       if (!form) return;
-
-       form.addEventListener('submit', async function (event) {
-         event.preventDefault();
-         status.textContent = '';
-
-         // Honeypot: if this has a value, it's probably a bot
-         const honeypot = form.querySelector('input[name="website"]');
-         if (honeypot && honeypot.value.trim() !== '') {
-          // Silently fail for bots
-          status.textContent = 'Looks like spam, try again.';
-           return;
-         }
-
-         // Basic front-end validation
-         const name = form.name.value.trim();
-         const email = form.email.value.trim();
-         const message = form.message.value.trim();
-
-         if (!name || !email || !message) {
-          status.textContent = 'Please fill in the required fields so I can get back to you.';
-           return;
-         }
-
-         // Very basic email sanity check
-         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-         if (!emailPattern.test(email)) {
-          status.textContent = "That email doesn't look right.";
-           return;
-         }
-
-        status.textContent = 'Sending, hang tight...';
-
-         try {
-           const formData = new FormData(form);
-           const response = await fetch(form.action, {
-             method: form.method,
-             body: formData,
-             headers: {
-               'Accept': 'application/json'
-             }
-           });
-
-           if (response.ok) {
-             status.textContent = "Thanks, I got your message! I'll reply as soon as I can.";
-             form.reset();
-           } else {
-             status.textContent = "Hmm, couldn't send. Try again later.";
-           }
-         } catch (err) {
-           console.error(err);
-           status.textContent = 'Network error. Try again later.';
-         }
-       });
-     })();
-   </script>
-  <noscript>
-    <p>
-      Hey, looks like JavaScript is off. You can email me at <span>[first name] [last name] [dot] dev [at] gmail [dot] com</span>
-      or hit me up on Discord: AwesomeKid99999#5063.
-    </p>
-  </noscript>
+<main id="main"> 
+  <h1>Tools</h1>
+  <p>Here are some cool tools and other random things I've made!</p>
+  <ul>
+    <li><a href="tools/time.html">Clock - A simple clock that shows the current time.</a></li>
+    </ul>
 </main>
 <hr>
 <footer>
   <p>It's currently <span id="your-time">[day of week], [month day, year] at HH:MM:SS</span> for you and <span id="my-time">[day of week], [month day, year] at HH:MM:SS</span> for me.
     <br>
     &copy; <span id="copyright-year">2026</span> AwesomeKid99999 (Andy Quach). All rights reserved. Last updated: <span id ="last-updated-since">MM/DD/YYYY HH:MM:SS</span> (your local date/time)<br>
-      This website was built <span id="under-construction-since">______</span>.
+    This website was built <span id="under-construction-since">______</span>.
   </p>
 </footer>
 <script src="./time.js"></script>

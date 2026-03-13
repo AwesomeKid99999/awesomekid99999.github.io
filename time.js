@@ -12,25 +12,53 @@
         var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
         
         var __legacyHour12 = false; // false = 24h, true = 12h
+        var __legacyShowMilliseconds = false;
 
-        function fmtDateTime(d) {
+        function fmtDateTime(d, includeMilliseconds) {
             var yyyy = d.getFullYear();
             var mm = pad2(d.getMonth() + 1);
             var dd = pad2(d.getDate());
             var hh = d.getHours();
             var mi = pad2(d.getMinutes());
             var ss = pad2(d.getSeconds());
+            var ms = ("00" + d.getMilliseconds()).slice(-3);
             
             var timeStr;
             if (__legacyHour12) {
               var h12 = hh % 12 || 12; // 0 becomes 12
               var ampm = hh < 12 ? "AM" : "PM";
-              timeStr = pad2(h12) + ":" + mi + ":" + ss + " " + ampm;
+              timeStr = pad2(h12) + ":" + mi + ":" + ss;
+              if (includeMilliseconds) {
+                timeStr += "." + ms;
+              }
+              timeStr += " " + ampm;
             } else {
               timeStr = pad2(hh) + ":" + mi + ":" + ss;
+              if (includeMilliseconds) {
+                timeStr += "." + ms;
+              }
             }
             
             return WDAYS[d.getDay()] + ", " + MONTHS[d.getMonth()] + " " + dd + ", " + yyyy + " at " + timeStr;
+        }
+
+        function fmtTimeOnly(d, includeMilliseconds) {
+          var hh = d.getHours();
+          var mi = pad2(d.getMinutes());
+          var ss = pad2(d.getSeconds());
+          var ms = ("00" + d.getMilliseconds()).slice(-3);
+
+          if (__legacyHour12) {
+            var h12 = hh % 12 || 12;
+            var ampm = hh < 12 ? "AM" : "PM";
+            var t12 = pad2(h12) + ":" + mi + ":" + ss;
+            if (includeMilliseconds) t12 += "." + ms;
+            return t12 + " " + ampm;
+          }
+
+          var t24 = pad2(hh) + ":" + mi + ":" + ss;
+          if (includeMilliseconds) t24 += "." + ms;
+          return t24;
         }
 
         function setTextLegacy(id, text){
@@ -43,8 +71,9 @@
 
         function legacyRender(){
             var now = new Date();
-            setTextLegacy("your-time", "Your local time: " + fmtDateTime(now));
+          setTextLegacy("your-time", "Your local time: " + fmtDateTime(now, false));
             setTextLegacy("my-time", "My local time: (Upgrade your browser to view)");
+          setTextLegacy("time-display", fmtTimeOnly(now, __legacyShowMilliseconds));
             setTextLegacy("under-construction-since",
                 "UNDER CONSTRUCTION SINCE (Relative time unavailable on this browser)");
             setTextLegacy("last-updated-since",
@@ -78,6 +107,11 @@
             if (stored === "12h") {
                 __legacyHour12 = true;
             }
+            var legacyStoredMs = localStorage.getItem("time-show-milliseconds");
+            if (legacyStoredMs === null) {
+                legacyStoredMs = localStorage.getItem("time-show-precision");
+            }
+            __legacyShowMilliseconds = legacyStoredMs === "true";
         } catch(e) {}
         
         return; // stop here for legacy
@@ -87,17 +121,29 @@
   // Consistent formatters for both your local time and LA time
   let __hour12 = false; // false = 24h, true = 12h
   let __userTimezone = null; // will be set from IP geolocation
+  let __showMilliseconds = false;
+  let __clockIntervalId = null;
 
   function initTimeFormat() {
     try {
       const stored = localStorage.getItem("time-format");
       __hour12 = stored === "12h";
+      let storedMilliseconds = localStorage.getItem("time-show-milliseconds");
+      if (storedMilliseconds === null) {
+        storedMilliseconds = localStorage.getItem("time-show-precision");
+      }
+      __showMilliseconds = storedMilliseconds === "true";
     } catch (e) {
       __hour12 = false;
+      __showMilliseconds = false;
     }
   }
 
   function detectUserTimezone() {
+    if (!(window.fetch && window.Promise)) {
+      return Promise.resolve(null);
+    }
+
     return fetch("https://ipapi.co/json/")
       .then(res => res.json())
       .then(data => {
@@ -111,44 +157,46 @@
   }
 
   function createFormatters() {
+    const dateTimeParts = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: __hour12
+    };
+
+    const displayTimeParts = {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: __hour12
+    };
+
+    if (__showMilliseconds) {
+      displayTimeParts.fractionalSecondDigits = 3;
+    }
+
     const formatters = {
-      LA_FMT: new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/Los_Angeles",
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: __hour12
-      })
+      LA_FOOTER_FMT: new Intl.DateTimeFormat("en-US", Object.assign({
+        timeZone: "America/Los_Angeles"
+      }, dateTimeParts))
     };
 
     // If we have user's timezone, use it; otherwise use browser's local time
     if (__userTimezone) {
-      formatters.LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
-        timeZone: __userTimezone,
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: __hour12
-      });
+      formatters.LOCAL_FOOTER_FMT = new Intl.DateTimeFormat("en-US", Object.assign({
+        timeZone: __userTimezone
+      }, dateTimeParts));
+
+      formatters.LOCAL_DISPLAY_FMT = new Intl.DateTimeFormat("en-US", Object.assign({
+        timeZone: __userTimezone
+      }, displayTimeParts));
     } else {
-      formatters.LOCAL_FMT = new Intl.DateTimeFormat("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: __hour12
-      });
+      formatters.LOCAL_FOOTER_FMT = new Intl.DateTimeFormat("en-US", dateTimeParts);
+      formatters.LOCAL_DISPLAY_FMT = new Intl.DateTimeFormat("en-US", displayTimeParts);
     }
 
     return formatters;
@@ -208,11 +256,14 @@
     const updatedEl = document.getElementById("last-updated-since");
     if (updatedEl) updatedEl.textContent = document.lastModified;
 
+    const bigTimeEl = document.getElementById("time-display");
+    if (bigTimeEl) bigTimeEl.textContent = formatters.LOCAL_DISPLAY_FMT.format(now);
+
     const yourEl = document.getElementById("your-time");
-    if (yourEl) yourEl.textContent = formatters.LOCAL_FMT.format(now);
+    if (yourEl) yourEl.textContent = formatters.LOCAL_FOOTER_FMT.format(now);
 
     const myEl = document.getElementById("my-time");
-    if (myEl) myEl.textContent = formatters.LA_FMT.format(now);
+    if (myEl) myEl.textContent = formatters.LA_FOOTER_FMT.format(now);
 
     const copyrightEl = document.getElementById("copyright-year");
     if (copyrightEl) copyrightEl.textContent = now.getFullYear();
@@ -226,37 +277,55 @@
   window.setTimeFormat = function(format) {
     __hour12 = format === "12h";
     formatters = createFormatters();
+    update();
   };
+
+    function bindPrecisionToggle(startClock) {
+    const precisionToggle = document.getElementById("show-precision");
+    if (!precisionToggle) return;
+
+    precisionToggle.checked = __showMilliseconds;
+    precisionToggle.addEventListener("change", function () {
+      __showMilliseconds = !!precisionToggle.checked;
+      try {
+        localStorage.setItem("time-show-milliseconds", String(__showMilliseconds));
+      } catch (e) {}
+
+      formatters = createFormatters();
+      update();
+      startClock();
+    });
+    }
 
   window.addEventListener("DOMContentLoaded", () => {
       function startClock() {
-          update();
-          setInterval(update, 1000);
+        const shouldRunAtMillisecondRate = __showMilliseconds && !!document.getElementById("time-display");
+        if (__clockIntervalId) {
+          clearInterval(__clockIntervalId);
+        }
+        update();
+        __clockIntervalId = setInterval(update, shouldRunAtMillisecondRate ? requestAnimationFrame : 1000);
       }
 
       // Initialize time format from localStorage
       initTimeFormat();
+      bindPrecisionToggle(startClock);
       
       // Detect user's timezone from IP, then setup formatters
-      detectUserTimezone().then(() => {
+      function afterTimezoneDetection() {
           formatters = createFormatters();
-          startClock();
-      }).catch(() => {
-          // Fallback: just start without timezone detection
-          formatters = createFormatters();
-          startClock();
-      });
 
-      // If fetch/Promises aren't available, just start the clock without server sync
-      if (!(window.fetch && window.Promise)) {
-          formatters = createFormatters();
+        // If fetch/Promises aren't available, just start the clock without server sync
+        if (!(window.fetch && window.Promise)) {
           startClock();
           return;
+        }
+
+        // Start after first sync; start even if sync fails
+        syncServerTime().then(startClock, startClock);
       }
 
-      // Start after first sync; start even if sync fails
-      syncServerTime()
-          .then(startClock, startClock);
+      detectUserTimezone().then(afterTimezoneDetection, afterTimezoneDetection);
 
       // Periodic resync (ignore errors)
       setInterval(function () {

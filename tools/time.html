@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <link rel="stylesheet" href="stylesheet.css">
+      <link rel="stylesheet" href="../stylesheet.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AwesomeKid99999's website!</title>
-          <meta property="og:title" content="AwesomeKid99999's website!">
-      <meta property="og:description" content="Andy's personal website – check out what he's working on.">
+      <meta property="og:title" content="awesomekid99999's website!">
+      <meta property="og:description" content="come hang out! andy's socials and a bit more about him.">
           <meta name="theme-color" content="#00ff00"/>
+      <link rel="canonical" href="https://username.github.io/">
+      <title>Clock - AwesomeKid99999's website!</title>
   </head>
-  <body>
+  <body class="time-page">
   <a class="skip-link" href="#main">Skip to main content</a>
   <header>
-  <nav class="nav-left">
-    <a href="index.html" class="button">Home</a>
-    <a href="about-me.html" class="button">About Me</a>
-    <a href="projects.html" class="button">Projects</a>
-    <a href="archive.html" class="button">Archive</a>
-    <a href="tools.html" class="button">Tools</a>
-    <a href="contact.html" class="button">Contact Me</a>
-  </nav>
       <nav class="nav-right">
-          <!-- wrap each label+select so the label displays above the control -->
           <div class="field"><label for="contrast">High Contrast:</label>
             <select id="contrast">
               <option value="off">Off</option>
@@ -55,7 +47,7 @@
           <div class="field"><label for="theme">Theme:</label>
             <select id="theme">
               <option value="system">System</option>
-              <option value="light">Light</option>
+              <option value="light">Light</option> 
               <option value="dark">Dark</option>
               <option value="custom">Custom</option>
             </select>
@@ -66,6 +58,7 @@
               <option value="12h">12-Hour</option>
             </select>
           </div>
+
           <details class="custom-theme-panel">
             <summary>Custom Theme</summary>
             <div class="custom-theme-controls">
@@ -126,39 +119,36 @@
               <button type="button" class="button" id="custom-theme-random">Randomize</button>
             </div>
           </details>
-          <a href="lightweight.html" class="button">View Lightweight Site</a>
-      </nav>
+
+           <a href="../tools.html" class="button">Go Back</a>
+       </nav>
   </header>
   <main id="main">
-      <h1>Andy's (AwesomeKid99999's) website!</h1>
+          <h1>What time is it?</h1>
+            <div>
+                <p>The time is:</p>
+                <p id="time-display" class="time-display" aria-live="polite"></p>
+                
+                <details class="show-milliseconds">
+                    <summary>Show Milliseconds</summary>
 
-      <p>
-          Welcome! This is my personal site where I showcase projects I've worked on.
-          I built this site with accessibility in mind, using plain HTML, CSS, and JavaScript, and it's hosted on GitHub Pages.
-          You can explore the <a href="https://github.com/AwesomeKid99999/awesomekid99999.github.io">source code here</a>.
-          Feel free to look around, and try out the accessibility settings in the top bar!
-      </p>
-
-      <h2>Featured Projects</h2>
-      <ul>
-          <li><a href="projects.html#stem-tutor">STEM Tutor - Offline Learning Platform</a></li>
-          <li><a href="projects.html#awesomebot99999">AwesomeBot99999 - Multipurpose Discord Bot</a></li>
-          <li><a href="projects.html#website"><em>This</em> website</a></li>
-          <li><a href="projects.html#the-awesome-obby">The Awesome Obby! - 3D Platformer (Unreal Engine)</a></li>
-          <li><a href="projects.html#time-trial-roblox">AwesomeKid99999's Time Trial - Roblox Obby</a></li>
-          <li><a href="projects.html#huffman-compressor">Huffman Coding Compressor</a></li>
-          <li><a href="projects.html#carbon-calculator">Weekly Carbon Footprint Calculator</a></li>
-      </ul>
-  </main>
+                        <div>
+                        <label for="show-precision">Enabled:</label>
+                        <input type="checkbox" id="show-precision">
+                        </div>
+                <em>Showing milliseconds can improve accuracy but may impact performance.</em><br></details>
+                <em>Pro Tip: Enable high contrast mode to display this page in black and white.</em>
+            </div>
+      </main> 
   <hr>
   <footer>
-      <p>It's currently <span id="your-time">[day of week], [month day, year] at HH:MM:SS</span> for you and <span id="my-time">[day of week], [month day, year] at HH:MM:SS</span> for me.
+      <p>It's currently <span id="your-time"></span> for you and <span id="my-time"></span> for me.
           <br>
-          &copy; <span id="copyright-year">2026</span> AwesomeKid99999 (Andy Quach). All rights reserved. Last updated: <span id ="last-updated-since">MM/DD/YYYY HH:MM:SS</span> (your local date/time)<br>
-            This website was built <span id="under-construction-since">______</span>.
+          &copy; <span id="copyright-year">2026</span> AwesomeKid99999 (Andy Quach). All rights reserved. Last updated: <span id ="last-updated-since"></span> (your local date/time)<br>
+          This website was built <span id="under-construction-since">______</span>.
       </p>
   </footer>
-  <script src="./time.js"></script>
-  <script src="accessibilitySettings.js"></script>
+  <script src="../time.js"></script>
+  <script src="../accessibilitySettings.js"></script>
   </body>
 </html>
