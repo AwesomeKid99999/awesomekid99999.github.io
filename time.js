@@ -124,6 +124,7 @@
   let __showMilliseconds = false;
   let __clockIntervalId = null;
   let __clockRafId = null;
+  let __clockSecondTimeoutId = null;
 
   function initTimeFormat() {
     try {
@@ -389,6 +390,10 @@
           cancelAnimationFrame(__clockRafId);
           __clockRafId = null;
         }
+        if (__clockSecondTimeoutId) {
+          clearTimeout(__clockSecondTimeoutId);
+          __clockSecondTimeoutId = null;
+        }
 
         if (shouldRunAtMillisecondRate && window.requestAnimationFrame) {
           const tick = function () {
@@ -400,7 +405,12 @@
         }
 
         update();
-        __clockIntervalId = setInterval(update, shouldRunAtMillisecondRate ? 33 : 1000);
+        const nowMs = getAdjustedNow().getTime();
+        const delayToNextSecond = 1000 - (nowMs % 1000);
+        __clockSecondTimeoutId = setTimeout(function () {
+          update();
+          __clockIntervalId = setInterval(update, 1000);
+        }, Math.max(1, delayToNextSecond));
       }
 
       // Initialize time format from localStorage
@@ -418,7 +428,8 @@
         }
 
         // Start after first sync; start even if sync fails
-        syncServerTime().then(startClock, startClock);
+        syncServerTime()
+          .then(() => { update(); startClock(); }, startClock);
       }
 
       detectUserTimezone().then(afterTimezoneDetection, afterTimezoneDetection);
@@ -426,8 +437,10 @@
       // Periodic resync (ignore errors)
       setInterval(function () {
           try {
-              syncServerTime().catch(function () {
-              });
+            syncServerTime()
+            .then(() => { update(); startClock(); })
+            .catch(function () {
+            });
           } catch (e) {
           }
       },   60 * 1000);
