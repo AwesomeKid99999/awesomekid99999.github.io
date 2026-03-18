@@ -120,9 +120,10 @@
   // ===== Modern path below =====
   // Consistent formatters for both your local time and LA time
   let __hour12 = false; // false = 24h, true = 12h
-  let __userTimezone = null; // will be set from IP geolocation
+  let __userTimezone = (Intl.DateTimeFormat().resolvedOptions().timeZone || null);
   let __showMilliseconds = false;
   let __clockIntervalId = null;
+  let __clockRafId = null;
 
   function initTimeFormat() {
     try {
@@ -140,6 +141,11 @@
   }
 
   function detectUserTimezone() {
+    // Browser-reported timezone is usually the most accurate for display.
+    if (__userTimezone) {
+      return Promise.resolve(__userTimezone);
+    }
+
     if (!(window.fetch && window.Promise)) {
       return Promise.resolve(null);
     }
@@ -210,7 +216,68 @@
   let __anchorServerMs = 0;
   let __anchorPerfMs = 0;
 
-  function syncServerTime() {
+  // External UTC sources (NIST-like) before falling back to same-origin Date header.
+  const EXTERNAL_TIME_SOURCES = [
+    "https://worldtimeapi.org/api/timezone/Etc/UTC",
+    "https://timeapi.io/api/Time/current/zone?timeZone=UTC"
+  ];
+
+  function parseDateString(value, assumeUtcForNaive) {
+    if (typeof value !== "string") return NaN;
+    const trimmed = value.trim();
+    if (!trimmed) return NaN;
+
+    const hasExplicitZone = /(?:Z|[+\-]\d\d:?\d\d)$/i.test(trimmed);
+    const normalized = (!hasExplicitZone && assumeUtcForNaive) ? `${trimmed}Z` : trimmed;
+    const parsed = Date.parse(normalized);
+    return Number.isFinite(parsed) ? parsed : NaN;
+  }
+
+  function extractServerUtcMs(payload, assumeUtcForNaive) {
+    if (!payload || typeof payload !== "object") return NaN;
+
+    const candidates = [
+      payload.utc_datetime,
+      payload.datetime,
+      payload.currentDateTime,
+      payload.dateTime,
+      payload.date
+    ];
+
+    for (let i = 0; i < candidates.length; i++) {
+      const value = candidates[i];
+      const parsed = parseDateString(value, assumeUtcForNaive);
+      if (Number.isFinite(parsed)) return parsed;
+    }
+
+    if (typeof payload.unixtime === "number") return payload.unixtime * 1000;
+    if (typeof payload.unixTime === "number") return payload.unixTime * 1000;
+    if (typeof payload.epochTime === "number") return payload.epochTime * 1000;
+
+    return NaN;
+  }
+
+  function syncFromExternalSource(url) {
+    const t0 = performance.now();
+    return fetch(url, { cache: "no-store" })
+      .then(res => {
+        if (!res.ok) throw new Error(`External time source failed (${res.status})`);
+        return res.json();
+      })
+      .then(data => {
+        const serverSentMs = extractServerUtcMs(data, true);
+        if (!Number.isFinite(serverSentMs)) {
+          throw new Error("External time source returned unsupported payload");
+        }
+        const t1 = performance.now();
+        const rtt = t1 - t0;
+        const serverAtArrival = serverSentMs + rtt / 2;
+        __anchorServerMs = serverAtArrival;
+        __anchorPerfMs = t1;
+      });
+  }
+
+  function syncFromDateHeader() {
     const url = `/time-ping.txt?nocache=${Math.random()}`;
     const t0 = performance.now();
 
@@ -225,10 +292,24 @@
       __anchorPerfMs = t1;
     }
 
-    // try HEAD first, then GET
     return fetch(url, { method: "HEAD", cache: "no-store" })
       .then(res => handle(res, "HEAD"))
-      .catch(() => fetch(url, { method: "GET", cache: "no-store" }).then(res => handle(res, "GET")))
+      .catch(() => fetch(url, { method: "GET", cache: "no-store" }).then(res => handle(res, "GET")));
+  }
+
+  function syncServerTime() {
+    let i = 0;
+
+    function tryNextExternal() {
+      if (i >= EXTERNAL_TIME_SOURCES.length) {
+        return Promise.reject(new Error("No external time source available"));
+      }
+      const source = EXTERNAL_TIME_SOURCES[i++];
+      return syncFromExternalSource(source).catch(tryNextExternal);
+    }
+
+    return tryNextExternal()
+      .catch(syncFromDateHeader)
       .catch(err => console.error("Time sync failed:", err));
   }
 
@@ -302,9 +383,24 @@
         const shouldRunAtMillisecondRate = __showMilliseconds && !!document.getElementById("time-display");
         if (__clockIntervalId) {
           clearInterval(__clockIntervalId);
+          __clockIntervalId = null;
         }
+        if (__clockRafId) {
+          cancelAnimationFrame(__clockRafId);
+          __clockRafId = null;
+        }
+
+        if (shouldRunAtMillisecondRate && window.requestAnimationFrame) {
+          const tick = function () {
+            update();
+            __clockRafId = requestAnimationFrame(tick);
+          };
+          tick();
+          return;
+        }
+
         update();
-        __clockIntervalId = setInterval(update, shouldRunAtMillisecondRate ? requestAnimationFrame : 1000);
+        __clockIntervalId = setInterval(update, shouldRunAtMillisecondRate ? 33 : 1000);
       }
 
       // Initialize time format from localStorage
