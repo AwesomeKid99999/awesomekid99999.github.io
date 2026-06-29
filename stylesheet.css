@@ -33,6 +33,18 @@ body.social * {
   text-align: center;
 }
 
+body.social.typology * {
+  text-transform: none;
+}
+
+body.social.typology header * {
+  text-transform: lowercase;
+}
+
+body.social.typology footer * {
+  text-transform: lowercase;
+}
+
 /* Replace per-element borders with a single box around each .social container */
 div.social {
   border: 2px solid #00cc00;
